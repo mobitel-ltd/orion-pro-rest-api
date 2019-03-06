@@ -7,3 +7,5 @@ List of using event types (EventTypeId)
 
 List of using access points (AccessPointId)
 122 - Запасной выход внешний,  128 - Турникет правый, 130 - Турникет левый
+
+[docs](./docs/global.html)

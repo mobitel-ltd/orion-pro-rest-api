@@ -10,4 +10,8 @@ watch:
 test:
 	npm run test
 
+docs:
+	rm -rf docs
+	npm run docs
+
 .PHONY: test
