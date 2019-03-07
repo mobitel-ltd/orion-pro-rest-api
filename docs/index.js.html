@@ -44,7 +44,7 @@
             <div class="column is-3" id="sidebarNav">
                 <div class="sidebar">
                     <nav>
-                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Externals</h3><ul><li><a href="external-SoapLib.html">SoapLib</a></li></ul><h3>Classes</h3><ul><li><a href="OrionApi.html">OrionApi</a></li></ul><h3><a href="global.html">Global</a></h3></div>
+                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="OrionApi.html">OrionApi</a></li></ul><h3><a href="global.html">Global</a></h3></div>
                     </nav>
                 </div>
             </div>
@@ -66,39 +66,13 @@
 const soapLib = require('soap');
 const parser = require('./parser');
 
-// TYPES
 /**
-    * Soap library object
-    * @external SoapLib
-    * @see {@link https://github.com/vpulim/node-soap}
+    * @typedef {Object} Logger logger
+    * @property {Function} debug debug log
+    * @property {Function} info info log
+    * @property {Function} warn warn log
+    * @property {Function} error error log
     */
-
-/**
- * TPersonData from Orion docs
-     * @typedef {Object} TPersonData person info
-     * @property {Number} Id check if user is in system
-     * @property {String} FirstName person firstname
-     * @property {String} MiddleName person middlename
-     * @property {String} LastName person lastname
-     * @property {Number} CompanyId inner id of company
-     * @property {Number} DepartmentId inner id of department
-     * @property {String} TabNum person tab num
-     * @property {Number} PositionId inner id of position in the company
-     */
-
-/**
- * Person object for adding to DB
-     * @typedef {Object} Person person info
-     * @property {String} LastName person lastname
-     * @property {String} FirstName person firstname
-     * @property {String} MiddleName person middlename
-     * @property {String} TabNum person tab num
-     * @property {Boolean} IsDismissed check if user is in system
-     * @property {Number} CompanyId inner id of company
-     * @property {Number} DepartmentId inner id of department
-     * @property {Number} PositionId inner id of position in the company
-     */
-
 
 /**
  * Api for getting user data from Orion system
@@ -107,19 +81,10 @@ const parser = require('./parser');
  */
 class OrionApi {
     /**
-    * @typedef {Object} Logger logger
-    * @property {Function} debug debug log
-    * @property {Function} info info log
-    * @property {Function} warn warn log
-    * @property {Function} error error log
-    */
-
-    /**
-     * @constructor
      * @param {Object} options options
-     * @param {String} options.url url to connect to server
+     * @param {!String} options.url url to connect to server
      * @param {Logger} [options.logger=console] logger like winston, JS console by default
-     * @param {module:soapLib} [options.lib=soapLib] lib to work with soap, by default is https://github.com/vpulim/node-soap
+     * @param {soapLib} [options.lib=soapLib] lib to work with soap, by default is https://github.com/vpulim/node-soap
      */
     constructor({url, logger = console, lib = soapLib}) {
         this.logger = logger;
@@ -129,6 +94,7 @@ class OrionApi {
 
     /**
      * Start Orion service
+     * @async
      * @private
      * @returns {Promise&lt;Object>} soap client instance
      */
@@ -140,10 +106,23 @@ class OrionApi {
         return client;
     }
 
+    /**
+     * Person object for adding to DB
+     * @typedef {Object} Person person info
+     * @property {String} LastName person lastname
+     * @property {String} FirstName person firstname
+     * @property {String} MiddleName person middlename
+     * @property {String} TabNum person tab num
+     * @property {Boolean} IsDismissed check if user is in system
+     * @property {Number} CompanyId inner id of company
+     * @property {Number} DepartmentId inner id of department
+     * @property {Number} PositionId inner id of position in the company
+     */
 
     /**
      * get person info about selected users
-     * @param {Object} options={} options for request
+     * @async
+     * @param {Object} [options={}] options for request
      * @param {Number} options.count=0 count by default is 0
      * @param {Number} options.offset=0 offset by default is 0
      * @param {Boolean} options.withoutPhoto=true don't get foto, true by default
@@ -162,11 +141,26 @@ class OrionApi {
     }
 
     /**
+     * TPersonData from Orion docs
+     * @typedef {Object} TPersonData person info
+     * @property {Number} Id check if user is in system
+     * @property {String} FirstName person firstname
+     * @property {String} MiddleName person middlename
+     * @property {String} LastName person lastname
+     * @property {Number} CompanyId inner id of company
+     * @property {Number} DepartmentId inner id of department
+     * @property {String} TabNum person tab num
+     * @property {Number} PositionId inner id of position in the company
+     */
+
+
+    /**
      * Get person info by tab number
+     * @async
      * @param {Object} options options for request
      * @param {String} options.tabNum person number
      * @param {Boolean} [options.withoutPhoto=true] don't get foto, true by default
-     * @param {('getDefaultPersonData'|'getPersonDataForPutPass')} parseType='getDefaultPersonData' parse way
+     * @param {('getDefaultPersonData'|'getPersonDataForPutPass')} [parseType='getDefaultPersonData'] parse way
      * @returns {Promise&lt;Person|TPersonData>} Person info by tab number, depending on parse typing, Person by default parser
      */
     async getPersonByTabNumber({tabNum, withoutPhoto = true}, parseType = 'getDefaultPersonData') {
@@ -193,22 +187,24 @@ class OrionApi {
     */
 
     /**
-     * Get events from server by params and parser them using config filter params
+     * Get collections with all events from server by params and with expected properties
+     * @async
      * @param {Object} options options for request
      * @param {String} options.beginTime strart ISO 8601 time of getting events
      * @param {String} options.endTime end ISO 8601 time of getting events
-     * @param {String[]|undefined} options.eventTypes=[] events types
-     * @param {Number|undefined} options.offset=0 offset by default is 0
-     * @param {Number|undefined} options.count=0 count by default is 0
+     * @param {Number[]} [options.accessPoints=[]] access points to check
+     * @param {Number[]} [options.eventTypes=[]] events types id to check
+     * @param {Number} [options.offset=0] offset by default is 0
+     * @param {Number} [options.count=0] count by default is 0
      * @returns {Promise&lt;Array.&lt;EventData>>} collection
      */
-    async getEvents({beginTime, endTime, eventTypes = [], offset = 0, count = 0}) {
+    async getEvents({beginTime, endTime, accessPoints = [], eventTypes = [], offset = 0, count = 0}) {
         try {
             const client = this.client || await this._start();
-            const data = await client.GetEventsAsync({beginTime, endTime, eventTypes, offset, count});
+            const data = await client.GetEventsAsync({beginTime, endTime, offset, count});
             this.logger.debug(`Get events from ${beginTime} till ${endTime} is succeded for events:`, eventTypes);
 
-            return parser.getEvents(data);
+            return parser.getEvents(eventTypes, accessPoints)(data);
         } catch (err) {
             this.logger.error(err);
         }
@@ -315,7 +311,7 @@ module.exports = OrionApi;
 
 <footer class="footer">
     <div class="content has-text-centered">
-        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Mar 07 2019 14:40:18 GMT+0300 (Moscow Standard Time)</p>
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Mar 07 2019 20:06:27 GMT+0300 (Moscow Standard Time)</p>
         <p class="sidebar-created-by">
             <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
             <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers</a>

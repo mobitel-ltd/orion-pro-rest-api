@@ -42,7 +42,7 @@
             <div class="column is-3" id="sidebarNav">
                 <div class="sidebar">
                     <nav>
-                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Externals</h3><ul><li><a href="external-SoapLib.html">SoapLib</a></li></ul><h3>Classes</h3><ul><li><a href="OrionApi.html">OrionApi</a></li></ul><h3><a href="global.html">Global</a></h3></div>
+                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="OrionApi.html">OrionApi</a></li></ul><h3><a href="global.html">Global</a></h3></div>
                     </nav>
                 </div>
             </div>
@@ -244,7 +244,7 @@
   <td class="type">
   
       
-<span class="param-type">module:soapLib</span>
+<span class="param-type">soapLib</span>
 
 
   
@@ -319,7 +319,7 @@
         <p class="tag-source">
             <a href="index.js.html" class="button">View Source</a>
             <span>
-                <a href="index.js.html">index.js</a>, <a href="index.js.html#line44">line 44</a>
+                <a href="index.js.html">index.js</a>, <a href="index.js.html#line18">line 18</a>
             </span>
         </p>
     
@@ -516,7 +516,7 @@
         <p class="tag-source">
             <a href="index.js.html" class="button">View Source</a>
             <span>
-                <a href="index.js.html">index.js</a>, <a href="index.js.html#line225">line 225</a>
+                <a href="index.js.html">index.js</a>, <a href="index.js.html#line221">line 221</a>
             </span>
         </p>
     
@@ -587,7 +587,7 @@
     
     
     <div class="description">
-        <p>Get events from server by params and parser them using config filter params</p>
+        <p>Get collections with all events from server by params and with expected properties</p>
     </div>
     
 
@@ -611,6 +611,8 @@
 
         <th>Type</th>
 
+        
+        <th>Attributes</th>
         
 
         
@@ -640,6 +642,14 @@
   </td>
 
   
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
 
   
       <td class="default">
@@ -668,6 +678,14 @@
   </td>
 
   
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
 
   
       <td class="default">
@@ -695,6 +713,14 @@
   </td>
 
   
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
 
   
       <td class="default">
@@ -709,32 +735,78 @@
     
 <tr class="deep-level-1">
   
-      <td class="name"><code>eventTypes</code></td>
+      <td class="name"><code>accessPoints</code></td>
   
 
   <td class="type">
   
       
-<span class="param-type">Array.&lt;String></span>
-|
-
-<span class="param-type">undefined</span>
+<span class="param-type">Array.&lt;Number></span>
 
 
   
   </td>
 
   
-
-  
-      <td class="default">
+      <td class="attributes">
       
-          [
+          &lt;optional><br>
+      
+
+      
+
       
       </td>
   
 
-  <td class="description last"><p>events types</p></td>
+  
+      <td class="default">
+      
+          []
+      
+      </td>
+  
+
+  <td class="description last"><p>access points to check</p></td>
+</tr>
+
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>eventTypes</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Array.&lt;Number></span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+          []
+      
+      </td>
+  
+
+  <td class="description last"><p>events types id to check</p></td>
 </tr>
 
   
@@ -748,14 +820,21 @@
   
       
 <span class="param-type">Number</span>
-|
-
-<span class="param-type">undefined</span>
 
 
   
   </td>
 
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
   
 
   
@@ -780,14 +859,21 @@
   
       
 <span class="param-type">Number</span>
-|
-
-<span class="param-type">undefined</span>
 
 
   
   </td>
 
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
   
 
   
@@ -847,7 +933,7 @@
         <p class="tag-source">
             <a href="index.js.html" class="button">View Source</a>
             <span>
-                <a href="index.js.html">index.js</a>, <a href="index.js.html#line141">line 141</a>
+                <a href="index.js.html">index.js</a>, <a href="index.js.html#line137">line 137</a>
             </span>
         </p>
     
@@ -1041,7 +1127,7 @@
         <p class="tag-source">
             <a href="index.js.html" class="button">View Source</a>
             <span>
-                <a href="index.js.html">index.js</a>, <a href="index.js.html#line168">line 168</a>
+                <a href="index.js.html">index.js</a>, <a href="index.js.html#line164">line 164</a>
             </span>
         </p>
     
@@ -1104,7 +1190,7 @@
             
         
         <span class="code-name">
-            getPersonByTabNumber<span class="signature">(options, parseType)</span><span class="type-signature"> &rarr; {Promise.&lt;(<a href="global.html#Person">Person</a>|<a href="global.html#TPersonData">TPersonData</a>)>}</span>
+            getPersonByTabNumber<span class="signature">(options, parseType<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;(<a href="global.html#Person">Person</a>|<a href="global.html#TPersonData">TPersonData</a>)>}</span>
         </span>
     </h4>
     
@@ -1286,6 +1372,8 @@
   
       <td class="attributes">
       
+          &lt;optional><br>
+      
 
       
 
@@ -1348,7 +1436,7 @@
         <p class="tag-source">
             <a href="index.js.html" class="button">View Source</a>
             <span>
-                <a href="index.js.html">index.js</a>, <a href="index.js.html#line108">line 108</a>
+                <a href="index.js.html">index.js</a>, <a href="index.js.html#line102">line 102</a>
             </span>
         </p>
     
@@ -1411,7 +1499,7 @@
             
         
         <span class="code-name">
-            getPersons<span class="signature">(options)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;<a href="global.html#Person">Person</a>>>}</span>
+            getPersons<span class="signature">(options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;<a href="global.html#Person">Person</a>>>}</span>
         </span>
     </h4>
     
@@ -1444,6 +1532,8 @@
         <th>Type</th>
 
         
+        <th>Attributes</th>
+        
 
         
         <th>Default</th>
@@ -1471,6 +1561,16 @@
   
   </td>
 
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
   
 
   
@@ -1502,6 +1602,14 @@
   </td>
 
   
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
 
   
       <td class="default">
@@ -1531,6 +1639,14 @@
   </td>
 
   
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
 
   
       <td class="default">
@@ -1559,6 +1675,14 @@
   
   </td>
 
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
   
 
   
@@ -1618,7 +1742,7 @@
         <p class="tag-source">
             <a href="index.js.html" class="button">View Source</a>
             <span>
-                <a href="index.js.html">index.js</a>, <a href="index.js.html#line88">line 88</a>
+                <a href="index.js.html">index.js</a>, <a href="index.js.html#line67">line 67</a>
             </span>
         </p>
     
@@ -1961,7 +2085,7 @@
         <p class="tag-source">
             <a href="index.js.html" class="button">View Source</a>
             <span>
-                <a href="index.js.html">index.js</a>, <a href="index.js.html#line197">line 197</a>
+                <a href="index.js.html">index.js</a>, <a href="index.js.html#line193">line 193</a>
             </span>
         </p>
     
@@ -2035,7 +2159,7 @@
 
 <footer class="footer">
     <div class="content has-text-centered">
-        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Mar 07 2019 14:40:18 GMT+0300 (Moscow Standard Time)</p>
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Mar 07 2019 20:06:27 GMT+0300 (Moscow Standard Time)</p>
         <p class="sidebar-created-by">
             <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
             <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers</a>
