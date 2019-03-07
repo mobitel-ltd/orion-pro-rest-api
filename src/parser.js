@@ -1,12 +1,11 @@
 const {pick, get, map, mapValues, head, pipe, conforms, filter, includes} = require('lodash/fp');
-const config = require('../config.json');
 const consts = require('./consts');
 
 const isIn = arr => item => includes(item, arr);
 
-const isValidEvent = conforms({
-    EventTypeId: isIn(config.EVENT_TYPES_ID_LIST),
-    AccessPointId: isIn(config.ACCESS_POINT_ID_LIST),
+const isValidEvent = (eventTypes, accessPoints) => conforms({
+    EventTypeId: isIn(eventTypes),
+    AccessPointId: isIn(accessPoints),
 });
 
 const eventsCollectionHandler = pipe([
@@ -38,11 +37,11 @@ module.exports = {
         personHandler(consts.PERSON_PUT_KEYS_LIST),
     ]),
 
-    getEvents: pipe([
+    getEvents: (eventTypes, accessPoints) => pipe([
         head,
         get(consts.PATH_TO_INFO_ARRAY),
         map(eventsCollectionHandler),
-        filter(isValidEvent),
+        filter(isValidEvent(eventTypes, accessPoints)),
     ]),
 
     getKey: pipe([

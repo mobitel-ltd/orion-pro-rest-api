@@ -42,7 +42,7 @@
             <div class="column is-3" id="sidebarNav">
                 <div class="sidebar">
                     <nav>
-                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="OrionApi.html">OrionApi</a></li></ul><h3><a href="global.html">Global</a></h3></div>
+                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Externals</h3><ul><li><a href="external-SoapLib.html">SoapLib</a></li></ul><h3>Classes</h3><ul><li><a href="OrionApi.html">OrionApi</a></li></ul><h3><a href="global.html">Global</a></h3></div>
                     </nav>
                 </div>
             </div>
@@ -62,7 +62,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>OrionApi<span class="signature">(url, logger, lib)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>OrionApi<span class="signature">(options)</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description"><p>API to work with soap protocol and Orion safe service</p></div>
         
     
 </header>
@@ -80,16 +82,12 @@
     <h4 class="name" id="OrionApi">
         
         <span class="code-name">
-            new OrionApi<span class="signature">(url, logger, lib)</span><span class="type-signature"></span>
+            new OrionApi<span class="signature">(options)</span><span class="type-signature"></span>
         </span>
     </h4>
     
 
     
-    
-    <div class="description">
-        <p>API to work with soap protocol and Orion safe service</p>
-    </div>
     
 
 
@@ -113,6 +111,8 @@
         <th>Type</th>
 
         
+        <th>Attributes</th>
+        
 
         
         <th>Default</th>
@@ -128,6 +128,42 @@
         
 <tr class="deep-level-0">
   
+      <td class="name"><code>options</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+      </td>
+  
+
+  <td class="description last"><p>options</p></td>
+</tr>
+
+  
+  
+    
+<tr class="deep-level-1">
+  
       <td class="name"><code>url</code></td>
   
 
@@ -141,6 +177,14 @@
   </td>
 
   
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
 
   
       <td class="default">
@@ -151,11 +195,9 @@
   <td class="description last"><p>url to connect to server</p></td>
 </tr>
 
-
+  
     
-
-        
-<tr class="deep-level-0">
+<tr class="deep-level-1">
   
       <td class="name"><code>logger</code></td>
   
@@ -163,12 +205,22 @@
   <td class="type">
   
       
-<span class="param-type">Object</span>
+<span class="param-type"><a href="global.html#Logger">Logger</a></span>
 
 
   
   </td>
 
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
   
 
   
@@ -179,14 +231,12 @@
       </td>
   
 
-  <td class="description last"><p>logger like winston, console by default</p></td>
+  <td class="description last"><p>logger like winston, JS console by default</p></td>
 </tr>
 
-
+  
     
-
-        
-<tr class="deep-level-0">
+<tr class="deep-level-1">
   
       <td class="name"><code>lib</code></td>
   
@@ -194,24 +244,36 @@
   <td class="type">
   
       
-<span class="param-type">lib</span>
+<span class="param-type">module:soapLib</span>
 
 
   
   </td>
 
   
-
-  
-      <td class="default">
+      <td class="attributes">
       
-          soap
+          &lt;optional><br>
+      
+
+      
+
       
       </td>
   
 
-  <td class="description last"><p>lib to work with soap, by default is soap</p></td>
+  
+      <td class="default">
+      
+          soapLib
+      
+      </td>
+  
+
+  <td class="description last"><p>lib to work with soap, by default is https://github.com/vpulim/node-soap</p></td>
 </tr>
+
+  
 
 
     
@@ -257,7 +319,7 @@
         <p class="tag-source">
             <a href="index.js.html" class="button">View Source</a>
             <span>
-                <a href="index.js.html">index.js</a>, <a href="index.js.html#line12">line 12</a>
+                <a href="index.js.html">index.js</a>, <a href="index.js.html#line44">line 44</a>
             </span>
         </p>
     
@@ -389,7 +451,7 @@
     
 <tr class="deep-level-1">
   
-      <td class="name"><code>CardNo</code></td>
+      <td class="name"><code>cardNo</code></td>
   
 
   <td class="type">
@@ -454,7 +516,7 @@
         <p class="tag-source">
             <a href="index.js.html" class="button">View Source</a>
             <span>
-                <a href="index.js.html">index.js</a>, <a href="index.js.html#line178">line 178</a>
+                <a href="index.js.html">index.js</a>, <a href="index.js.html#line225">line 225</a>
             </span>
         </p>
     
@@ -517,7 +579,7 @@
             
         
         <span class="code-name">
-            getEvents<span class="signature">(options)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;{Description: String, EventDate: String, EventTypeId: Number, EventId: String, AccessPointId: Number, PassMode: Number}>>}</span>
+            getEvents<span class="signature">(options)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;<a href="global.html#EventData">EventData</a>>>}</span>
         </span>
     </h4>
     
@@ -785,7 +847,7 @@
         <p class="tag-source">
             <a href="index.js.html" class="button">View Source</a>
             <span>
-                <a href="index.js.html">index.js</a>, <a href="index.js.html#line104">line 104</a>
+                <a href="index.js.html">index.js</a>, <a href="index.js.html#line141">line 141</a>
             </span>
         </p>
     
@@ -822,7 +884,7 @@
     <div class='column is-5 has-text-left'>
         <label>Type: </label>
         
-<span class="param-type">Promise.&lt;Array.&lt;{Description: String, EventDate: String, EventTypeId: Number, EventId: String, AccessPointId: Number, PassMode: Number}>></span>
+<span class="param-type">Promise.&lt;Array.&lt;<a href="global.html#EventData">EventData</a>>></span>
 
 
     </div>
@@ -848,16 +910,12 @@
             
         
         <span class="code-name">
-            getKey<span class="signature">(options)</span><span class="type-signature"> &rarr; {Promise.&lt;{AccessLevelId: Number, IsBlocked: Boolean, PersonId: Number, StartDate: Date, EndDate: Date}>}</span>
+            getKey<span class="signature">(options)</span><span class="type-signature"> &rarr; {Promise.&lt;<a href="global.html#CardData">CardData</a>>}</span>
         </span>
     </h4>
     
 
     
-    
-    <div class="description">
-        <p>Get key information</p>
-    </div>
     
 
 
@@ -983,7 +1041,7 @@
         <p class="tag-source">
             <a href="index.js.html" class="button">View Source</a>
             <span>
-                <a href="index.js.html">index.js</a>, <a href="index.js.html#line122">line 122</a>
+                <a href="index.js.html">index.js</a>, <a href="index.js.html#line168">line 168</a>
             </span>
         </p>
     
@@ -1020,7 +1078,7 @@
     <div class='column is-5 has-text-left'>
         <label>Type: </label>
         
-<span class="param-type">Promise.&lt;{AccessLevelId: Number, IsBlocked: Boolean, PersonId: Number, StartDate: Date, EndDate: Date}></span>
+<span class="param-type">Promise.&lt;<a href="global.html#CardData">CardData</a>></span>
 
 
     </div>
@@ -1079,6 +1137,8 @@
         <th>Type</th>
 
         
+        <th>Attributes</th>
+        
 
         
         <th>Default</th>
@@ -1106,6 +1166,14 @@
   
   </td>
 
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
   
 
   
@@ -1135,6 +1203,14 @@
   </td>
 
   
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
 
   
       <td class="default">
@@ -1161,6 +1237,16 @@
   
   </td>
 
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
   
 
   
@@ -1197,6 +1283,14 @@
   
   </td>
 
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
   
 
   
@@ -1254,7 +1348,7 @@
         <p class="tag-source">
             <a href="index.js.html" class="button">View Source</a>
             <span>
-                <a href="index.js.html">index.js</a>, <a href="index.js.html#line82">line 82</a>
+                <a href="index.js.html">index.js</a>, <a href="index.js.html#line108">line 108</a>
             </span>
         </p>
     
@@ -1285,7 +1379,7 @@
 
 <div class="columns">
     
-    <div class='param-desc column is-7'><p>Person info by tab number, depending on parse typing</p></div>
+    <div class='param-desc column is-7'><p>Person info by tab number, depending on parse typing, Person by default parser</p></div>
     
     
     <div class='column is-5 has-text-left'>
@@ -1524,7 +1618,7 @@
         <p class="tag-source">
             <a href="index.js.html" class="button">View Source</a>
             <span>
-                <a href="index.js.html">index.js</a>, <a href="index.js.html#line62">line 62</a>
+                <a href="index.js.html">index.js</a>, <a href="index.js.html#line88">line 88</a>
             </span>
         </p>
     
@@ -1867,7 +1961,7 @@
         <p class="tag-source">
             <a href="index.js.html" class="button">View Source</a>
             <span>
-                <a href="index.js.html">index.js</a>, <a href="index.js.html#line150">line 150</a>
+                <a href="index.js.html">index.js</a>, <a href="index.js.html#line197">line 197</a>
             </span>
         </p>
     
@@ -1920,128 +2014,6 @@
 
 </div>
             
-                <div class="member">
-
-    
-    <h4 class="name" id="start">
-        
-            
-                <span class='tag'>async</span>
-            
-        
-        <span class="code-name">
-            start<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;Object>}</span>
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>Start Orion service</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="index.js.html" class="button">View Source</a>
-            <span>
-                <a href="index.js.html">index.js</a>, <a href="index.js.html#line22">line 22</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'><p>soap client instance</p></div>
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<span class="param-type">Promise.&lt;Object></span>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
-
-
-
-
-</div>
-            
             </div>
         </div>
     
@@ -2063,7 +2035,7 @@
 
 <footer class="footer">
     <div class="content has-text-centered">
-        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Mar 07 2019 01:05:18 GMT+0300 (Moscow Standard Time)</p>
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Mar 07 2019 14:40:18 GMT+0300 (Moscow Standard Time)</p>
         <p class="sidebar-created-by">
             <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
             <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers</a>

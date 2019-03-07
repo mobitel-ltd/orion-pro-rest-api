@@ -44,7 +44,7 @@
             <div class="column is-3" id="sidebarNav">
                 <div class="sidebar">
                     <nav>
-                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="OrionApi.html">OrionApi</a></li></ul><h3><a href="global.html">Global</a></h3></div>
+                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Externals</h3><ul><li><a href="external-SoapLib.html">SoapLib</a></li></ul><h3>Classes</h3><ul><li><a href="OrionApi.html">OrionApi</a></li></ul><h3><a href="global.html">Global</a></h3></div>
                     </nav>
                 </div>
             </div>
@@ -63,35 +63,18 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/* eslint new-cap: ["error", { "properties": false }]*/
-const soap = require('soap');
+const soapLib = require('soap');
 const parser = require('./parser');
 
-class OrionApi {
-    /**
-     * API to work with soap protocol and Orion safe service
-     * @param {String} url url to connect to server
-     * @param {Object} logger=console logger like winston, console by default
-     * @param {lib} lib=soap lib to work with soap, by default is soap
-     */
-    constructor(url, logger = defaultConfig, lib = soap) {
-        this.logger = logger;
-        this.url = url;
-        this.lib = lib;
-    }
+// TYPES
+/**
+    * Soap library object
+    * @external SoapLib
+    * @see {@link https://github.com/vpulim/node-soap}
+    */
 
-    /**
-     * Start Orion service
-     * @returns {Promise&lt;Object>} soap client instance
-     */
-    async start() {
-        const client = await this.lib.createClientAsync(this.url);
-        this.logger.info('Connected to Orion!!!');
-        this.client = client;
-
-        return client;
-    }
-
-    /**
+/**
+ * TPersonData from Orion docs
      * @typedef {Object} TPersonData person info
      * @property {Number} Id check if user is in system
      * @property {String} FirstName person firstname
@@ -103,7 +86,8 @@ class OrionApi {
      * @property {Number} PositionId inner id of position in the company
      */
 
-    /**
+/**
+ * Person object for adding to DB
      * @typedef {Object} Person person info
      * @property {String} LastName person lastname
      * @property {String} FirstName person firstname
@@ -115,6 +99,48 @@ class OrionApi {
      * @property {Number} PositionId inner id of position in the company
      */
 
+
+/**
+ * Api for getting user data from Orion system
+ * @class
+ * @classdesc API to work with soap protocol and Orion safe service
+ */
+class OrionApi {
+    /**
+    * @typedef {Object} Logger logger
+    * @property {Function} debug debug log
+    * @property {Function} info info log
+    * @property {Function} warn warn log
+    * @property {Function} error error log
+    */
+
+    /**
+     * @constructor
+     * @param {Object} options options
+     * @param {String} options.url url to connect to server
+     * @param {Logger} [options.logger=console] logger like winston, JS console by default
+     * @param {module:soapLib} [options.lib=soapLib] lib to work with soap, by default is https://github.com/vpulim/node-soap
+     */
+    constructor({url, logger = console, lib = soapLib}) {
+        this.logger = logger;
+        this.url = url;
+        this.lib = lib;
+    }
+
+    /**
+     * Start Orion service
+     * @private
+     * @returns {Promise&lt;Object>} soap client instance
+     */
+    async _start() {
+        const client = await this.lib.createClientAsync(this.url);
+        this.logger.info('Connected to Orion!!!');
+        this.client = client;
+
+        return client;
+    }
+
+
     /**
      * get person info about selected users
      * @param {Object} options={} options for request
@@ -125,7 +151,7 @@ class OrionApi {
      */
     async getPersons(options = {}) {
         try {
-            const client = this.client || await this.start();
+            const client = this.client || await this._start();
             const data = await client.GetPersonsAsync({count: 0, offset: 0, withoutPhoto: true, ...options});
             this.logger.debug('Request for getting person info is succeded!!!');
 
@@ -139,13 +165,13 @@ class OrionApi {
      * Get person info by tab number
      * @param {Object} options options for request
      * @param {String} options.tabNum person number
-     * @param {Boolean} options.withoutPhoto=true don't get foto, true by default
+     * @param {Boolean} [options.withoutPhoto=true] don't get foto, true by default
      * @param {('getDefaultPersonData'|'getPersonDataForPutPass')} parseType='getDefaultPersonData' parse way
-     * @returns {Promise&lt;Person|TPersonData>} Person info by tab number, depending on parse typing
+     * @returns {Promise&lt;Person|TPersonData>} Person info by tab number, depending on parse typing, Person by default parser
      */
     async getPersonByTabNumber({tabNum, withoutPhoto = true}, parseType = 'getDefaultPersonData') {
         try {
-            const client = this.client || await this.start();
+            const client = this.client || await this._start();
             const data = await client.GetPersonByTabNumberAsync({tabNum, withoutPhoto});
             this.logger.debug(`Request for getting info about person by tub number ${tabNum} is succeded!!!`);
 
@@ -156,6 +182,17 @@ class OrionApi {
     }
 
     /**
+     * @typedef {Object} EventData person info
+     * @property {String} Description event description
+     * @property {String} EventDate date of event
+     * @property {Number} EventTypeId event types id
+     * @property {String} EventId event id
+     * @property {Number} AccessPointId access point id
+     // TODO add limit of events
+     * @property {Number} PassMode pass mode
+    */
+
+    /**
      * Get events from server by params and parser them using config filter params
      * @param {Object} options options for request
      * @param {String} options.beginTime strart ISO 8601 time of getting events
@@ -163,11 +200,11 @@ class OrionApi {
      * @param {String[]|undefined} options.eventTypes=[] events types
      * @param {Number|undefined} options.offset=0 offset by default is 0
      * @param {Number|undefined} options.count=0 count by default is 0
-     * @returns {Promise&lt;Array.&lt;{Description: String, EventDate: String, EventTypeId: Number, EventId: String, AccessPointId: Number, PassMode: Number}>>} collection
+     * @returns {Promise&lt;Array.&lt;EventData>>} collection
      */
     async getEvents({beginTime, endTime, eventTypes = [], offset = 0, count = 0}) {
         try {
-            const client = this.client || await this.start();
+            const client = this.client || await this._start();
             const data = await client.GetEventsAsync({beginTime, endTime, eventTypes, offset, count});
             this.logger.debug(`Get events from ${beginTime} till ${endTime} is succeded for events:`, eventTypes);
 
@@ -178,14 +215,23 @@ class OrionApi {
     }
 
     /**
-     * Get key information
+     * @typedef {Object} CardData card info
+     * @property {Number} AccessLevelId card access level id
+     * @property {Boolean} IsBlocked is card blocked
+     * @property {Number} PersonId card owner id
+     * @property {Date} StartDate date of start using card
+     * @property {Date} EndDate date of end using card
+    */
+
+    /**
+     * @async Get key information
      * @param {Object} options options for request
      * @param {String} options.cardNo card id of person
-     * @returns {Promise&lt;{AccessLevelId: Number, IsBlocked: Boolean, PersonId: Number, StartDate: Date, EndDate: Date}>} collection
+     * @returns {Promise&lt;CardData>} collection
      */
     async getKey(options) {
         try {
-            const client = this.client || await this.start();
+            const client = this.client || await this._start();
             const data = await client.GetKeyDataAsync(options);
             this.logger.debug('Get info about card by cardno %s is succeded!!!', options.cardNo);
 
@@ -202,6 +248,7 @@ class OrionApi {
 
     /**
      * Set accsess for user by card with limit of time
+     * @async
      * @param {Object} options options for request
      * @param {String} options.cardNo card number to set
      * @param {String} options.tabNum person number
@@ -213,7 +260,7 @@ class OrionApi {
      */
     async putPass({tabNum, ...options}) {
         try {
-            const client = this.client || await this.start();
+            const client = this.client || await this._start();
             const personData = await this.getPersonByTabNumber({tabNum}, 'getPersonDataForPutPass');
             // TODO add access level depending on current level of user in system
             const defaultAccessOptions = {
@@ -236,12 +283,12 @@ class OrionApi {
      * Remove card access
      * @async
      * @param {Object} options request options
-     * @param {String} options.CardNo card number
+     * @param {String} options.cardNo card number
      * @returns {Promise&lt;Boolean>} result of request
      */
     async deletePass(options) {
         try {
-            const client = this.client || await this.start();
+            const client = this.client || await this._start();
             const data = await client.DeletePassAsync(options);
             this.logger.debug('Removing data access for card number %s is succeded!!!', options.cardNo);
 
@@ -268,7 +315,7 @@ module.exports = OrionApi;
 
 <footer class="footer">
     <div class="content has-text-centered">
-        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Mar 07 2019 01:05:18 GMT+0300 (Moscow Standard Time)</p>
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Mar 07 2019 14:40:18 GMT+0300 (Moscow Standard Time)</p>
         <p class="sidebar-created-by">
             <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
             <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers</a>
