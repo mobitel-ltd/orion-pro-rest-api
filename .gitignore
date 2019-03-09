@@ -65,9 +65,6 @@ package-lock.json
 examples/typescript-server.js
 test/types/index.js
 
-# test
-test
-
 # config.json
 config.json
 
