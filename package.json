@@ -1,8 +1,11 @@
 {
-  "name": "local-service",
+  "name": "@mobitel.ltd/orion-pro-api",
   "version": "1.0.0",
   "description": "my local service",
   "main": "index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "docs": "node_modules/.bin/jsdoc -c jsdoc.json",
     "lint": "eslint .",
