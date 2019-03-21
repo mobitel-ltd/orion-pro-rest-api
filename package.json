@@ -2,8 +2,8 @@
   "name": "@mobitel.ltd/orion-pro-api",
   "version": "1.2.0",
   "description": "my local service",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
