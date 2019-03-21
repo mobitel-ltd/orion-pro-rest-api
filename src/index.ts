@@ -77,12 +77,14 @@ export interface PutPass {
 
 
 export class OrionApi {
-    url!: string;
+    url: string;
     logger: Console = console;
-    lib: any;
+    lib: any = Soap;
     private client: any | undefined;
 
-    constructor(params: OrionApi) {}
+    constructor(params: OrionApi) {
+        this.url = params.url;
+    }
 
     async _start(): Promise<Soap.Client> {
         const client = await this.lib.createClientAsync(this.url);
