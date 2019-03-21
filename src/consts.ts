@@ -1,4 +1,4 @@
-module.exports = Object.freeze({
+export default {
     PATH_TO_INFO: 'return.OperationResult',
     PATH_TO_INFO_ARRAY: 'return.OperationResult.item',
     VALUE_NAME: '$value',
@@ -38,4 +38,4 @@ module.exports = Object.freeze({
         'StartDate',
         'EndDate',
     ],
-});
+};

@@ -1,19 +1,19 @@
-const faker = require('faker');
-const testUtils = require('./fixtures/utils');
+// import * as faker from 'faker';
+import * as testUtils  from './fixtures/utils';
 // const getEventsJSON = require('./fixtures/get-events.json');
 // const getPersonsJSON = require('./fixtures/get-persons.json');
 // const getPersonByTabJSON = require('./fixtures/get-person-by-tab.json');
-const parser = require('../src/parser');
-const assert = require('assert');
+import * as parser from '../src/parser';
+import * as assert from 'assert';
 
 describe('Test data parser', () => {
-    const accessPointIdList = Array.from({length: 5}, faker.random.number);
-    const eventIdList = Array.from({length: 5}, faker.random.number);
+    const accessPointIdList = Array.from({length: 5}, () => 12345);
+    const eventIdList = Array.from({length: 5}, () => 12345);
 
-    let keyData;
-    let personData;
-    let listPersonData;
-    let eventData;
+    let keyData: any;
+    let personData: any;
+    let listPersonData: any;
+    let eventData: any;
     const count = 100;
 
     beforeEach(() => {
@@ -60,7 +60,7 @@ describe('Test data parser', () => {
 
     it('Expect getEvents works correct', () => {
         const result = parser.getEvents(eventIdList, accessPointIdList)(eventData);
-        const body = eventData[0].return.OperationResult.item.find(item =>
+        const body = eventData[0].return.OperationResult.item.find((item: any) =>
             eventIdList.includes(item.EventTypeId.$value) &&
             accessPointIdList.includes(item.AccessPointId.$value));
 

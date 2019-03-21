@@ -1,4 +1,4 @@
-const faker = require('faker');
+import * as faker from 'faker';
 
 const ITEMTYPE = 'READER';
 const SECTIONID = faker.random.number();
@@ -6,10 +6,10 @@ const COMPORTNUMBER = faker.random.number();
 const PKUADDRESS = faker.random.number();
 const COMPUTERID = faker.random.number();
 
-const getRandomArrayMix = arr =>
+const getRandomArrayMix = (arr: any) =>
     faker.random.arrayElement([...arr, ...Array.from({length: 5}, faker.random.number)]);
 
-const getEventData = (eventIdList, accessPointIdList) => (val, index) => ({
+const getEventData = (eventIdList: any, accessPointIdList: any) => (val: any, index: number) => ({
     'attributes': {
         'id': (index + 1).toString(),
         'xsi:type': 'NS2:TEvent',
@@ -438,7 +438,7 @@ const getKeyData = () => ({
     },
 });
 
-const getPersonDataJSON = () => [
+export const getPersonDataJSON = () => [
     {
         'return': {
             'attributes': {
@@ -459,7 +459,7 @@ const getPersonDataJSON = () => [
     'XML info',
 ];
 
-const getListPersonsDataJSON = count => [
+export const getListPersonsDataJSON = (count: any) => [
     {
         'return': {
             'attributes': {
@@ -486,7 +486,7 @@ const getListPersonsDataJSON = count => [
     'XML info',
 ];
 
-const getKeyDataJSON = () => [
+export const getKeyDataJSON = () => [
     {
         'return': {
             'attributes': {
@@ -507,7 +507,7 @@ const getKeyDataJSON = () => [
     'XML info',
 ];
 
-const getListEventDataJSON = (count, eventIdList, accessPointIdList) => [
+export const getListEventDataJSON = (count: any, eventIdList: any, accessPointIdList: any) => [
     {
         'return': {
             'attributes': {
@@ -533,10 +533,3 @@ const getListEventDataJSON = (count, eventIdList, accessPointIdList) => [
     null,
     'XML info',
 ];
-
-module.exports = {
-    getPersonDataJSON,
-    getListPersonsDataJSON,
-    getKeyDataJSON,
-    getListEventDataJSON,
-};

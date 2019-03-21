@@ -1,18 +1,17 @@
 {
   "name": "@mobitel.ltd/orion-pro-api",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "my local service",
-  "main": "./src/index.js",
-  "types": "./src/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
     "build": "tsc",
     "docs": "node_modules/.bin/jsdoc -c jsdoc.json",
-    "lint": "eslint .",
     "dev": "node index.dev.js",
-    "test": "NODE_ENV=test mocha test/*.test.js --exit"
+    "test": "NODE_ENV=test mocha -r ts-node/register test/*.test.ts --exit"
   },
   "keywords": [
     "soap",
@@ -21,22 +20,29 @@
     "rest"
   ],
   "pre-commit": [
-    "lint",
     "test"
   ],
   "author": "grigori-gru",
   "license": "ISC",
+  "files": [
+    "dist/**/*"
+  ],
   "devDependencies": {
+    "@types/bluebird": "^3.5.26",
+    "@types/faker": "^4.1.5",
+    "@types/mocha": "^5.2.6",
+    "@types/node": "^11.11.4",
     "better-docs": "^1.1.5",
-    "eslint": "^5.14.1",
-    "eslint-config-google": "^0.12.0",
-    "eslint-plugin-chai-friendly": "0.4.1",
-    "faker": "latest",
+    "faker": "^4.1.0",
     "jsdoc": "^3.5.5",
-    "mocha": "^6.0.2",
-    "pre-commit": "^1.2.2"
+    "pre-commit": "^1.2.2",
+    "ts-node": "^8.0.3",
+    "tslint": "^5.14.0",
+    "typescript": "^3.3.4000"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.123",
+    "@types/soap": "^0.21.0",
     "lodash": "^4.17.11",
     "soap": "^0.26.0"
   }
