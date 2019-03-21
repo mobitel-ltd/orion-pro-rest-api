@@ -82,8 +82,10 @@ export class OrionApi {
     lib: any = Soap;
     private client: any | undefined;
 
-    constructor(params: OrionApi) {
-        this.url = params.url;
+    constructor(url: string, logger = console, lib = Soap) {
+        this.url = url;
+        this.logger = logger;
+        this.lib = lib;
     }
 
     async _start(): Promise<Soap.Client> {
