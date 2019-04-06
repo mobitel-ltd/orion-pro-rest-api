@@ -7,451 +7,451 @@ const PKUADDRESS = faker.random.number();
 const COMPUTERID = faker.random.number();
 
 const getRandomArrayMix = (arr: any) =>
-    faker.random.arrayElement([...arr, ...Array.from({length: 5}, faker.random.number)]);
+    faker.random.arrayElement([...arr, ...Array.from({ length: 5 }, faker.random.number)]);
 
 const getEventData = (eventIdList: any, accessPointIdList: any) => (val: any, index: number) => ({
-    'attributes': {
-        'id': (index + 1).toString(),
+    attributes: {
+        id: (index + 1).toString(),
         'xsi:type': 'NS2:TEvent',
     },
-    'EventId': {
-        'attributes': {
+    EventId: {
+        attributes: {
             'xsi:type': 'xsd:string',
         },
-        '$value': `{${faker.random.uuid().toUpperCase()}}`,
+        $value: `{${faker.random.uuid().toUpperCase()}}`,
     },
-    'EventTypeId': {
-        'attributes': {
+    EventTypeId: {
+        attributes: {
             'xsi:type': 'xsd:int',
         },
-        '$value': getRandomArrayMix(eventIdList),
+        $value: getRandomArrayMix(eventIdList),
     },
-    'EventDate': {
-        'attributes': {
+    EventDate: {
+        attributes: {
             'xsi:type': 'xsd:dateTime',
         },
-        '$value': '2019-03-02T21:09:40.000Z',
+        $value: '2019-03-02T21:09:40.000Z',
     },
-    'Description': {
-        'attributes': {
+    Description: {
+        attributes: {
             'xsi:type': 'xsd:string',
         },
-        '$value': faker.random.words(),
+        $value: faker.random.words(),
     },
-    'ComputerId': {
-        'attributes': {
+    ComputerId: {
+        attributes: {
             'xsi:type': 'xsd:int',
         },
-        '$value': COMPUTERID,
+        $value: COMPUTERID,
     },
-    'ComPortNumber': {
-        'attributes': {
+    ComPortNumber: {
+        attributes: {
             'xsi:type': 'xsd:int',
         },
-        '$value': COMPORTNUMBER,
+        $value: COMPORTNUMBER,
     },
-    'PKUAddress': {
-        'attributes': {
+    PKUAddress: {
+        attributes: {
             'xsi:type': 'xsd:int',
         },
-        '$value': PKUADDRESS,
+        $value: PKUADDRESS,
     },
-    'DevAddress': {
-        'attributes': {
+    DevAddress: {
+        attributes: {
             'xsi:type': 'xsd:int',
         },
-        '$value': faker.random.number(),
+        $value: faker.random.number(),
     },
-    'ZoneAddress': {
-        'attributes': {
+    ZoneAddress: {
+        attributes: {
             'xsi:type': 'xsd:int',
         },
-        '$value': faker.random.number(),
+        $value: faker.random.number(),
     },
-    'AccessPointId': {
-        'attributes': {
+    AccessPointId: {
+        attributes: {
             'xsi:type': 'xsd:int',
         },
-        '$value': getRandomArrayMix(accessPointIdList),
+        $value: getRandomArrayMix(accessPointIdList),
     },
-    'AccessPointName': {
-        'attributes': {
+    AccessPointName: {
+        attributes: {
             'xsi:type': 'xsd:string',
         },
-        '$value': faker.random.word(),
+        $value: faker.random.word(),
     },
-    'AccessZoneId': {
-        'attributes': {
+    AccessZoneId: {
+        attributes: {
             'xsi:type': 'xsd:int',
         },
-        '$value': -1,
+        $value: -1,
     },
-    'PassMode': {
-        'attributes': {
+    PassMode: {
+        attributes: {
             'xsi:type': 'xsd:int',
         },
-        '$value': faker.random.arrayElement([1, 2]),
+        $value: faker.random.arrayElement([1, 2]),
     },
-    'CardNo': {
-        'attributes': {
+    CardNo: {
+        attributes: {
             'xsi:type': 'xsd:string',
         },
-        '$value': faker.random.alphaNumeric(16).toUpperCase(),
+        $value: faker.random.alphaNumeric(16).toUpperCase(),
     },
-    'PersonId': {
-        'attributes': {
+    PersonId: {
+        attributes: {
             'xsi:type': 'xsd:int',
         },
-        '$value': faker.random.number(),
+        $value: faker.random.number(),
     },
-    'LastName': {
-        'attributes': {
+    LastName: {
+        attributes: {
             'xsi:type': 'xsd:string',
         },
-        '$value': faker.name.lastName(),
+        $value: faker.name.lastName(),
     },
-    'FirstName': {
-        'attributes': {
+    FirstName: {
+        attributes: {
             'xsi:type': 'xsd:string',
         },
-        '$value': faker.name.firstName(),
+        $value: faker.name.firstName(),
     },
-    'MiddleName': {
-        'attributes': {
+    MiddleName: {
+        attributes: {
             'xsi:type': 'xsd:string',
         },
-        '$value': faker.name.firstName(),
+        $value: faker.name.firstName(),
     },
-    'BirthDate': {
-        'attributes': {
+    BirthDate: {
+        attributes: {
             'xsi:type': 'xsd:dateTime',
         },
-        '$value': '1899-12-29T22:01:00.000Z',
+        $value: '1899-12-29T22:01:00.000Z',
     },
-    'TabNum': {
-        'attributes': {
+    TabNum: {
+        attributes: {
             'xsi:type': 'xsd:string',
         },
-        '$value': faker.random.number(),
+        $value: faker.random.number(),
     },
-    'ItemType': {
-        'attributes': {
+    ItemType: {
+        attributes: {
             'xsi:type': 'xsd:string',
         },
-        '$value': ITEMTYPE,
+        $value: ITEMTYPE,
     },
-    'SectionId': {
-        'attributes': {
+    SectionId: {
+        attributes: {
             'xsi:type': 'xsd:int',
         },
-        '$value': SECTIONID,
+        $value: SECTIONID,
     },
 });
 
 const getTPersonData = () => ({
-    'attributes': {
-        'id': '2',
+    attributes: {
+        id: '2',
         'xsi:type': 'NS2:TPersonData',
     },
-    'Id': {
-        'attributes': {
+    Id: {
+        attributes: {
             'xsi:type': 'xsd:int',
         },
-        '$value': faker.random.number(),
+        $value: faker.random.number(),
     },
-    'LastName': {
-        'attributes': {
+    LastName: {
+        attributes: {
             'xsi:type': 'xsd:string',
         },
-        '$value': faker.name.lastName(),
+        $value: faker.name.lastName(),
     },
-    'FirstName': {
-        'attributes': {
+    FirstName: {
+        attributes: {
             'xsi:type': 'xsd:string',
         },
-        '$value': faker.name.firstName(),
+        $value: faker.name.firstName(),
     },
-    'MiddleName': {
-        'attributes': {
+    MiddleName: {
+        attributes: {
             'xsi:type': 'xsd:string',
         },
-        '$value': faker.name.firstName(),
+        $value: faker.name.firstName(),
     },
-    'BirthDate': {
-        'attributes': {
+    BirthDate: {
+        attributes: {
             'xsi:type': 'xsd:dateTime',
         },
-        '$value': '1899-12-29T22:01:00.000Z',
+        $value: '1899-12-29T22:01:00.000Z',
     },
-    'Company': {
-        'attributes': {
+    Company: {
+        attributes: {
             'xsi:type': 'xsd:string',
         },
-        '$value': faker.company.companyName(),
+        $value: faker.company.companyName(),
     },
-    'Department': {
-        'attributes': {
+    Department: {
+        attributes: {
             'xsi:type': 'xsd:string',
         },
-        '$value': faker.name.jobTitle(),
+        $value: faker.name.jobTitle(),
     },
-    'Position': {
-        'attributes': {
+    Position: {
+        attributes: {
             'xsi:type': 'xsd:string',
         },
-        '$value': faker.name.jobType(),
+        $value: faker.name.jobType(),
     },
-    'CompanyId': {
-        'attributes': {
+    CompanyId: {
+        attributes: {
             'xsi:type': 'xsd:int',
         },
-        '$value': faker.random.number(),
+        $value: faker.random.number(),
     },
-    'DepartmentId': {
-        'attributes': {
+    DepartmentId: {
+        attributes: {
             'xsi:type': 'xsd:int',
         },
-        '$value': faker.random.number(),
+        $value: faker.random.number(),
     },
-    'PositionId': {
-        'attributes': {
+    PositionId: {
+        attributes: {
             'xsi:type': 'xsd:int',
         },
-        '$value': faker.random.number(),
+        $value: faker.random.number(),
     },
-    'TabNum': {
-        'attributes': {
+    TabNum: {
+        attributes: {
             'xsi:type': 'xsd:string',
         },
-        '$value': faker.random.number().toString(),
+        $value: faker.random.number().toString(),
     },
-    'Phone': {
-        'attributes': {
-            'xsi:type': 'xsd:string',
-        },
-    },
-    'HomePhone': {
-        'attributes': {
+    Phone: {
+        attributes: {
             'xsi:type': 'xsd:string',
         },
     },
-    'Address': {
-        'attributes': {
+    HomePhone: {
+        attributes: {
             'xsi:type': 'xsd:string',
         },
     },
-    'AccessLevelId': {
-        'attributes': {
+    Address: {
+        attributes: {
+            'xsi:type': 'xsd:string',
+        },
+    },
+    AccessLevelId: {
+        attributes: {
             'xsi:type': 'xsd:int',
         },
-        '$value': faker.random.number(),
+        $value: faker.random.number(),
     },
-    'Status': {
-        'attributes': {
+    Status: {
+        attributes: {
             'xsi:type': 'xsd:int',
         },
-        '$value': faker.random.number(),
+        $value: faker.random.number(),
     },
-    'ContactIdIndex': {
-        'attributes': {
+    ContactIdIndex: {
+        attributes: {
             'xsi:type': 'xsd:int',
         },
-        '$value': faker.random.number(),
+        $value: faker.random.number(),
     },
-    'IsLockedDayCrossing': {
-        'attributes': {
+    IsLockedDayCrossing: {
+        attributes: {
             'xsi:type': 'xsd:boolean',
         },
-        '$value': faker.random.boolean(),
+        $value: faker.random.boolean(),
     },
-    'IsFreeShedule': {
-        'attributes': {
+    IsFreeShedule: {
+        attributes: {
             'xsi:type': 'xsd:boolean',
         },
-        '$value': faker.random.boolean(),
+        $value: faker.random.boolean(),
     },
-    'ExternalId': {
-        'attributes': {
+    ExternalId: {
+        attributes: {
             'xsi:type': 'xsd:string',
         },
     },
-    'IsInArchive': {
-        'attributes': {
+    IsInArchive: {
+        attributes: {
             'xsi:type': 'xsd:boolean',
         },
-        '$value': false,
+        $value: false,
     },
-    'DocumentType': {
-        'attributes': {
+    DocumentType: {
+        attributes: {
             'xsi:type': 'xsd:int',
         },
-        '$value': faker.random.number(),
+        $value: faker.random.number(),
     },
-    'DocumentSerials': {
-        'attributes': {
+    DocumentSerials: {
+        attributes: {
             'xsi:type': 'xsd:string',
         },
     },
-    'DocumentNumber': {
-        'attributes': {
+    DocumentNumber: {
+        attributes: {
             'xsi:type': 'xsd:string',
         },
     },
-    'DocumentIssueDate': {
-        'attributes': {
+    DocumentIssueDate: {
+        attributes: {
             'xsi:type': 'xsd:dateTime',
         },
-        '$value': '1899-12-29T22:01:00.000Z',
+        $value: '1899-12-29T22:01:00.000Z',
     },
-    'DocumentEndingDate': {
-        'attributes': {
+    DocumentEndingDate: {
+        attributes: {
             'xsi:type': 'xsd:dateTime',
         },
-        '$value': '1899-12-29T22:01:00.000Z',
+        $value: '1899-12-29T22:01:00.000Z',
     },
-    'DocumentIsser': {
-        'attributes': {
+    DocumentIsser: {
+        attributes: {
             'xsi:type': 'xsd:string',
         },
     },
-    'DocumentIsserCode': {
-        'attributes': {
+    DocumentIsserCode: {
+        attributes: {
             'xsi:type': 'xsd:string',
         },
     },
-    'Sex': {
-        'attributes': {
+    Sex: {
+        attributes: {
             'xsi:type': 'xsd:int',
         },
-        '$value': 0,
+        $value: 0,
     },
-    'Birthplace': {
-        'attributes': {
+    Birthplace: {
+        attributes: {
             'xsi:type': 'xsd:string',
         },
     },
-    'EmailList': {
-        'attributes': {
+    EmailList: {
+        attributes: {
             'xsi:type': 'xsd:string',
         },
     },
-    'ArchivingTimeStamp': {
-        'attributes': {
+    ArchivingTimeStamp: {
+        attributes: {
             'xsi:type': 'xsd:dateTime',
         },
-        '$value': '1899-12-29T22:01:00.000Z',
+        $value: '1899-12-29T22:01:00.000Z',
     },
-    'IsInBlackList': {
-        'attributes': {
+    IsInBlackList: {
+        attributes: {
             'xsi:type': 'xsd:boolean',
         },
-        '$value': false,
+        $value: false,
     },
-    'IsDismissed': {
-        'attributes': {
+    IsDismissed: {
+        attributes: {
             'xsi:type': 'xsd:boolean',
         },
-        '$value': false,
+        $value: false,
     },
-    'BlackListComment': {
-        'attributes': {
+    BlackListComment: {
+        attributes: {
             'xsi:type': 'xsd:string',
         },
     },
-    'ChangeTime': {
-        'attributes': {
+    ChangeTime: {
+        attributes: {
             'xsi:type': 'xsd:dateTime',
         },
-        '$value': '2017-09-12T13:05:32.000Z',
+        $value: '2017-09-12T13:05:32.000Z',
     },
-    'Itn': {
-        'attributes': {
+    Itn: {
+        attributes: {
             'xsi:type': 'xsd:string',
         },
     },
 });
 
 const getKeyData = () => ({
-    'attributes': {
-        'id': '2',
+    attributes: {
+        id: '2',
         'xsi:type': 'NS2:TKeyData',
     },
-    'CodeType': {
-        'attributes': {
+    CodeType: {
+        attributes: {
             'xsi:type': 'xsd:int',
         },
-        '$value': faker.random.number(),
+        $value: faker.random.number(),
     },
-    'Code': {
-        'attributes': {
+    Code: {
+        attributes: {
             'xsi:type': 'xsd:string',
         },
-        '$value': faker.random.alphaNumeric(16).toUpperCase(),
+        $value: faker.random.alphaNumeric(16).toUpperCase(),
     },
-    'PersonId': {
-        'attributes': {
+    PersonId: {
+        attributes: {
             'xsi:type': 'xsd:int',
         },
-        '$value': faker.random.number(),
+        $value: faker.random.number(),
     },
-    'AccessLevelId': {
-        'attributes': {
+    AccessLevelId: {
+        attributes: {
             'xsi:type': 'xsd:int',
         },
-        '$value': faker.random.number(),
+        $value: faker.random.number(),
     },
-    'StartDate': {
-        'attributes': {
+    StartDate: {
+        attributes: {
             'xsi:type': 'xsd:dateTime',
         },
-        '$value': '2011-12-01T21:00:00.000Z',
+        $value: '2011-12-01T21:00:00.000Z',
     },
-    'EndDate': {
-        'attributes': {
+    EndDate: {
+        attributes: {
             'xsi:type': 'xsd:dateTime',
         },
-        '$value': '2020-01-01T20:59:59.000Z',
+        $value: '2020-01-01T20:59:59.000Z',
     },
-    'IsBlocked': {
-        'attributes': {
+    IsBlocked: {
+        attributes: {
             'xsi:type': 'xsd:boolean',
         },
-        '$value': false,
+        $value: false,
     },
-    'IsStoreInDevice': {
-        'attributes': {
+    IsStoreInDevice: {
+        attributes: {
             'xsi:type': 'xsd:boolean',
         },
-        '$value': true,
+        $value: true,
     },
-    'IsStoreInS2000': {
-        'attributes': {
+    IsStoreInS2000: {
+        attributes: {
             'xsi:type': 'xsd:boolean',
         },
-        '$value': false,
+        $value: false,
     },
-    'IsInStopList': {
-        'attributes': {
+    IsInStopList: {
+        attributes: {
             'xsi:type': 'xsd:boolean',
         },
-        '$value': false,
+        $value: false,
     },
 });
 
 export const getPersonDataJSON = () => [
     {
-        'return': {
-            'attributes': {
-                'id': '1',
+        return: {
+            attributes: {
+                id: '1',
                 'xsi:type': 'NS2:TOperationResultPersonData',
             },
-            'Success': {
-                'attributes': {
+            Success: {
+                attributes: {
                     'xsi:type': 'xsd:boolean',
                 },
-                '$value': true,
+                $value: true,
             },
-            'OperationResult': getTPersonData(),
+            OperationResult: getTPersonData(),
         },
     },
     'Very big xml',
@@ -461,23 +461,23 @@ export const getPersonDataJSON = () => [
 
 export const getListPersonsDataJSON = (count: any) => [
     {
-        'return': {
-            'attributes': {
-                'id': '1',
+        return: {
+            attributes: {
+                id: '1',
                 'xsi:type': 'NS2:TOperationResultPersons',
             },
-            'Success': {
-                'attributes': {
+            Success: {
+                attributes: {
                     'xsi:type': 'xsd:boolean',
                 },
-                '$value': true,
+                $value: true,
             },
-            'OperationResult': {
-                'attributes': {
+            OperationResult: {
+                attributes: {
                     'xsi:type': 'SOAP-ENC:Array',
                     'SOAP-ENC:arrayType': `NS2:TPersonData[${count}]`,
                 },
-                'item': Array.from({length: count}, getTPersonData),
+                item: Array.from({ length: count }, getTPersonData),
             },
         },
     },
@@ -488,18 +488,18 @@ export const getListPersonsDataJSON = (count: any) => [
 
 export const getKeyDataJSON = () => [
     {
-        'return': {
-            'attributes': {
-                'id': '1',
+        return: {
+            attributes: {
+                id: '1',
                 'xsi:type': 'NS2:TOperationResultKeyData',
             },
-            'Success': {
-                'attributes': {
+            Success: {
+                attributes: {
                     'xsi:type': 'xsd:boolean',
                 },
-                '$value': true,
+                $value: true,
             },
-            'OperationResult': getKeyData(),
+            OperationResult: getKeyData(),
         },
     },
     'Very big xml',
@@ -509,23 +509,23 @@ export const getKeyDataJSON = () => [
 
 export const getListEventDataJSON = (count: any, eventIdList: any, accessPointIdList: any) => [
     {
-        'return': {
-            'attributes': {
-                'id': '1',
+        return: {
+            attributes: {
+                id: '1',
                 'xsi:type': 'NS2:TOperationResultEvents',
             },
-            'Success': {
-                'attributes': {
+            Success: {
+                attributes: {
                     'xsi:type': 'xsd:boolean',
                 },
-                '$value': true,
+                $value: true,
             },
-            'OperationResult': {
-                'attributes': {
+            OperationResult: {
+                attributes: {
                     'xsi:type': 'SOAP-ENC:Array',
                     'SOAP-ENC:arrayType': `NS2:TEvent[${count}]`,
                 },
-                'item': Array.from({length: count}, getEventData(eventIdList, accessPointIdList)),
+                item: Array.from({ length: count }, getEventData(eventIdList, accessPointIdList)),
             },
         },
     },

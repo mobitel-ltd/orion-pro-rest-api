@@ -1,6 +1,6 @@
 {
   "name": "@mobitel.ltd/orion-pro-api",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "my local service",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -41,6 +41,7 @@
     "typescript": "^3.3.4000"
   },
   "dependencies": {
+    "prettier": "1.16.4",
     "@types/lodash": "^4.14.123",
     "@types/soap": "^0.21.0",
     "lodash": "^4.17.11",

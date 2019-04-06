@@ -22,20 +22,6 @@ export default {
         'DepartmentId',
         'PositionId',
     ],
-    EVENT_KEYS_LIST: [
-        'TabNum',
-        'Description',
-        'EventDate',
-        'EventTypeId',
-        'EventId',
-        'AccessPointId',
-        'PassMode',
-    ],
-    CARD_KEYS_LIST: [
-        'AccessLevelId',
-        'IsBlocked',
-        'PersonId',
-        'StartDate',
-        'EndDate',
-    ],
+    EVENT_KEYS_LIST: ['TabNum', 'Description', 'EventDate', 'EventTypeId', 'EventId', 'AccessPointId', 'PassMode'],
+    CARD_KEYS_LIST: ['AccessLevelId', 'IsBlocked', 'PersonId', 'StartDate', 'EndDate'],
 };

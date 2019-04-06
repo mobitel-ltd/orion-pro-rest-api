@@ -3,24 +3,22 @@ import * as Soap from 'soap';
 import * as parser from './parser';
 
 export interface EventData {
-     Description: string;
-     EventDate: string;
-     EventTypeId: Number;
-     EventId: string;
-     AccessPointId: Number;
-     // TODO add limit of events
-     PassMode: Number;
+    Description: string;
+    EventDate: string;
+    EventTypeId: Number;
+    EventId: string;
+    AccessPointId: Number;
+    // TODO add limit of events
+    PassMode: Number;
 }
 
 export interface CardData {
-    CardData: object;
     AccessLevelId: number;
     IsBlocked: boolean;
     PersonId: number;
-    StartDate: Date;
-    EndDate: Date;
+    StartDate: string;
+    EndDate: string;
 }
-
 
 export interface Person {
     LastName: string;
@@ -48,9 +46,9 @@ export type ParseType = 'getDefaultPersonData' | 'getPersonDataForPutPass';
 
 export interface GetEventsOptions {
     /* ISO 8601 time of getting events */
-    beginTime: Date;
+    beginTime: string;
     /* ISO 8601 time of getting events */
-    endTime: Date;
+    endTime: string;
     accessPoints?: number[];
     eventTypes?: number[];
     offset?: number;
@@ -75,7 +73,6 @@ export interface PutPass {
     dateEnd: string;
 }
 
-
 export class OrionApi {
     url: string;
     logger: Console = console;
@@ -88,7 +85,7 @@ export class OrionApi {
         this.lib = lib;
     }
 
-    async _start(): Promise<Soap.Client> {
+    private async start(): Promise<Soap.Client> {
         const client = await this.lib.createClientAsync(this.url);
         this.logger.info('Connected to Orion!!!');
         this.client = client;
@@ -96,15 +93,23 @@ export class OrionApi {
         return client;
     }
 
-
     /**
      * get person info about selected users
      */
-    async getPersons(options?: {count: number, offset: number, withoutPhoto: boolean}): Promise<Person[] | undefined> {
+    async getPersons(options?: {
+        count: number;
+        offset: number;
+        withoutPhoto: boolean;
+    }): Promise<Person[] | undefined> {
         try {
-            const {count = 0, offset = 0, withoutPhoto = true} = options || {};
-            const client = this.client || await this._start();
-            const data = await client.GetPersonsAsync({count: 0, offset: 0, withoutPhoto: true, ...options});
+            const { count = 0, offset = 0, withoutPhoto = true } = options || {};
+            const client = this.client || (await this.start());
+            const data = await client.GetPersonsAsync({
+                count: 0,
+                offset: 0,
+                withoutPhoto: true,
+                ...options,
+            });
             this.logger.debug('Request for getting person info is succeded!!!');
 
             return parser.getPersons(data);
@@ -113,17 +118,16 @@ export class OrionApi {
         }
     }
 
-
     /**
      * Get person info by tab number
      */
-    async getPersonByTabNumber(
-        options: GetPersonByTabNumber,
-        parseType: ParseType = 'getDefaultPersonData',
-        ) {
+    async getPersonByTabNumber(options: GetPersonByTabNumber, parseType: ParseType = 'getDefaultPersonData') {
         try {
-            const client = this.client || await this._start();
-            const data = await client.GetPersonByTabNumberAsync({withoutPhoto: true,  ...options});
+            const client = this.client || (await this.start());
+            const data = await client.GetPersonByTabNumberAsync({
+                withoutPhoto: true,
+                ...options,
+            });
             this.logger.debug(`Request for getting info about person by tub number ${options.tabNum} is succeded!!!`);
 
             return parser[parseType](data);
@@ -132,15 +136,19 @@ export class OrionApi {
         }
     }
 
-
     /**
      * Get collections with all events from server by params and with expected properties
      */
     async getEvents(options: GetEventsOptions): Promise<EventData[] | undefined> {
         try {
-            const {beginTime, endTime, offset = 0, count = 0, accessPoints = [], eventTypes = []} = options;
-            const client = this.client || await this._start();
-            const data = await client.GetEventsAsync({beginTime, endTime, offset, count});
+            const { beginTime, endTime, offset = 0, count = 0, accessPoints = [], eventTypes = [] } = options;
+            const client = this.client || (await this.start());
+            const data = await client.GetEventsAsync({
+                beginTime,
+                endTime,
+                offset,
+                count,
+            });
             this.logger.debug(`Get events from ${beginTime} till ${endTime} is succeded for events:`, eventTypes);
 
             return parser.getEvents(eventTypes, accessPoints)(data);
@@ -149,13 +157,12 @@ export class OrionApi {
         }
     }
 
-
     /**
      * @async Get key information
      */
-    async getKey(options: {cardNo: string}): Promise<CardData | undefined> {
+    async getKey(options: { cardNo: string }): Promise<CardData | undefined> {
         try {
-            const client = this.client || await this._start();
+            const client = this.client || (await this.start());
             const data = await client.GetKeyDataAsync(options);
             this.logger.debug('Get info about card by cardno %s is succeded!!!', options.cardNo);
 
@@ -165,19 +172,22 @@ export class OrionApi {
         }
     }
 
-
     /**  Set accsess for user by card with limit of time */
-    async putPass({tabNum, ...options}: PutPass): Promise<boolean> {
+    async putPass({ tabNum, ...options }: PutPass): Promise<boolean> {
         try {
-            const client = this.client || await this._start();
-            const personData = await this.getPersonByTabNumber({tabNum}, 'getPersonDataForPutPass');
+            const client = this.client || (await this.start());
+            const personData = await this.getPersonByTabNumber({ tabNum }, 'getPersonDataForPutPass');
             // TODO add access level depending on current level of user in system
             const defaultAccessOptions = {
                 AccessLevel: {
                     Id: 311,
                 },
             };
-            const params = {...options, personData, accessLevels: defaultAccessOptions};
+            const params = {
+                ...options,
+                personData,
+                accessLevels: defaultAccessOptions,
+            };
             const data = await client.PutPassWithAccLevelsAsync(params);
             this.logger.debug('Setting access for user %s to card %s is succeded!!!', tabNum, options.cardNo);
 
@@ -194,9 +204,9 @@ export class OrionApi {
      * Remove card access
      * @returns {Promise<Boolean>} result of request
      */
-    async deletePass(options: {cardNo: string}): Promise<boolean> {
+    async deletePass(options: { cardNo: string }): Promise<boolean> {
         try {
-            const client = this.client || await this._start();
+            const client = this.client || (await this.start());
             const data = await client.DeletePassAsync(options);
             this.logger.debug('Removing data access for card number %s is succeded!!!', options.cardNo);
 
@@ -205,7 +215,7 @@ export class OrionApi {
         } catch (err) {
             this.logger.error(err);
 
-            return false
+            return false;
         }
     }
 }
