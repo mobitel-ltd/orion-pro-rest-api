@@ -3,6 +3,7 @@ import * as Soap from 'soap';
 import * as parser from './parser';
 
 export interface EventData {
+    TabNum: string;
     Description: string;
     EventDate: string;
     EventTypeId: number;

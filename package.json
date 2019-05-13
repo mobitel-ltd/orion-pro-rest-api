@@ -1,17 +1,22 @@
 {
     "name": "@mobitel.ltd/orion-pro-api",
-    "version": "1.4.7",
+    "version": "1.5.0",
     "description": "my local service",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "publishConfig": {
         "access": "public"
     },
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:mobitel-ltd/orion-pro-rest-api.git"
+    },
     "scripts": {
         "build": "tsc",
         "docs": "node_modules/.bin/jsdoc -c jsdoc.json",
         "dev": "node index.dev.js",
-        "test": "NODE_ENV=test mocha -r ts-node/register test/*.test.ts --exit"
+        "test": "NODE_ENV=test mocha -r ts-node/register test/*.test.ts --exit",
+        "prepublish": "rimraf dist && npm run build"
     },
     "keywords": [
         "soap",
@@ -41,6 +46,7 @@
         "typescript": "^3.3.4000"
     },
     "dependencies": {
+        "rimraf": "^2.6.3",
         "prettier": "1.16.4",
         "@types/lodash": "^4.14.123",
         "@types/soap": "^0.21.0",
