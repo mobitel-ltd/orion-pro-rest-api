@@ -5,11 +5,11 @@ import * as parser from './parser';
 export interface EventData {
     Description: string;
     EventDate: string;
-    EventTypeId: Number;
+    EventTypeId: number;
     EventId: string;
-    AccessPointId: Number;
+    AccessPointId: number;
     // TODO add limit of events
-    PassMode: Number;
+    PassMode: number;
 }
 
 export interface CardData {
@@ -25,21 +25,21 @@ export interface Person {
     FirstName: string;
     MiddleName: string;
     TabNum: string;
-    IsDismissed: Boolean;
-    CompanyId: Number;
-    DepartmentId: Number;
-    PositionId: Number;
+    IsDismissed: boolean;
+    CompanyId: number;
+    DepartmentId: number;
+    PositionId: number;
 }
 
 export interface TPersonData {
-    Id: Number;
+    Id: number;
     FirstName: string;
     MiddleName: string;
     LastName: string;
-    CompanyId: Number;
-    DepartmentId: Number;
+    CompanyId: number;
+    DepartmentId: number;
     TabNum: string;
-    PositionId: Number;
+    PositionId: number;
 }
 
 export type ParseType = 'getDefaultPersonData' | 'getPersonDataForPutPass';
@@ -202,7 +202,7 @@ export class OrionApi {
 
     /**
      * Remove card access
-     * @returns {Promise<Boolean>} result of request
+     * @returns {Promise<boolean>} result of request
      */
     async deletePass(options: { cardNo: string }): Promise<boolean> {
         try {
