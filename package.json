@@ -1,74 +1,74 @@
 {
-  "name": "@mobitel.ltd/orion-pro-api",
-  "version": "1.5.1",
-  "description": "my local service",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "publishConfig": {
-    "access": "public"
-  },
-  "scripts": {
-    "build": "rimraf dist && tsc",
-    "prepublish": "npm run build",
-    "docs": "node_modules/.bin/typedoc --excludeExternals --out docs src/index.ts",
-    "dev": "ts-node index.dev.ts",
-    "test": "jest"
-  },
-  "keywords": [
-    "soap",
-    "Orion PRO",
-    "api",
-    "rest"
-  ],
-  "pre-commit": [
-    "test",
-    "docs"
-  ],
-  "author": "grigori-gru",
-  "license": "ISC",
-  "files": [
-    "dist/**/*"
-  ],
-  "devDependencies": {
-    "@types/bluebird": "^3.5.26",
-    "@types/faker": "^4.1.5",
-    "@types/jest": "^24.0.17",
-    "@types/node": "^11.11.4",
-    "faker": "^4.1.0",
-    "jest": "^24.8.0",
-    "pre-commit": "^1.2.2",
-    "ts-jest": "^24.0.2",
-    "ts-node": "^8.3.0",
-    "tslint": "^5.14.0",
-    "typedoc": "^0.15.0",
-    "typescript": "^3.3.4000"
-  },
-  "dependencies": {
-    "@types/lodash": "^4.14.123",
-    "@types/soap": "^0.21.0",
-    "lodash": "^4.17.11",
-    "prettier": "1.16.4",
-    "rimraf": "^2.6.3",
-    "soap": "^0.26.0"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
-    ],
-    "testRegex": ".test.ts$",
-    "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
+    "name": "@mobitel.ltd/orion-pro-api",
+    "version": "1.5.2",
+    "description": "my local service",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "publishConfig": {
+        "access": "public"
     },
-    "testEnvironment": "node",
-    "modulePathIgnorePatterns": [
-      "node_modules"
+    "scripts": {
+        "build": "rimraf dist && tsc",
+        "prepublish": "npm run build",
+        "docs": "node_modules/.bin/typedoc --excludeExternals --out docs src/index.ts",
+        "dev": "ts-node index.dev.ts",
+        "test": "jest"
+    },
+    "keywords": [
+        "soap",
+        "Orion PRO",
+        "api",
+        "rest"
     ],
-    "globals": {
-      "ts-jest": {
-        "diagnostics": false
-      }
+    "pre-commit": [
+        "test",
+        "docs"
+    ],
+    "author": "grigori-gru",
+    "license": "ISC",
+    "files": [
+        "dist/**/*"
+    ],
+    "devDependencies": {
+        "@types/bluebird": "^3.5.26",
+        "@types/faker": "^4.1.5",
+        "@types/jest": "^24.0.17",
+        "@types/node": "^11.11.4",
+        "faker": "^4.1.0",
+        "jest": "^24.8.0",
+        "pre-commit": "^1.2.2",
+        "ts-jest": "^24.0.2",
+        "ts-node": "^8.3.0",
+        "tslint": "^5.14.0",
+        "typedoc": "^0.15.0",
+        "typescript": "^3.3.4000"
+    },
+    "dependencies": {
+        "@types/lodash": "^4.14.123",
+        "@types/soap": "^0.21.0",
+        "lodash": "^4.17.11",
+        "prettier": "1.16.4",
+        "rimraf": "^2.6.3",
+        "soap": "^0.26.0"
+    },
+    "jest": {
+        "moduleFileExtensions": [
+            "js",
+            "json",
+            "ts"
+        ],
+        "testRegex": ".test.ts$",
+        "transform": {
+            "^.+\\.(t|j)s$": "ts-jest"
+        },
+        "testEnvironment": "node",
+        "modulePathIgnorePatterns": [
+            "node_modules"
+        ],
+        "globals": {
+            "ts-jest": {
+                "diagnostics": false
+            }
+        }
     }
-  }
 }
