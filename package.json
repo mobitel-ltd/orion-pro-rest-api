@@ -1,6 +1,6 @@
 {
     "name": "@mobitel.ltd/orion-pro-api",
-    "version": "1.5.0",
+    "version": "1.5.1",
     "description": "my local service",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -9,7 +9,7 @@
     },
     "scripts": {
         "build": "rimraf dist && tsc",
-        "prepublish": "build",
+        "prepublish": "npm run build",
         "docs": "node_modules/.bin/typedoc --excludeExternals --out docs src/index.ts",
         "dev": "ts-node index.dev.ts",
         "test": "jest"
