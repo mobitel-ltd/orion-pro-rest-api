@@ -89,9 +89,9 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_index_.orionapi.html#client" class="tsd-kind-icon">client</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_index_.orionapi.html#lib" class="tsd-kind-icon">lib</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_index_.orionapi.html#lib" class="tsd-kind-icon">lib</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_index_.orionapi.html#logger" class="tsd-kind-icon">logger</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_index_.orionapi.html#url" class="tsd-kind-icon">url</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_index_.orionapi.html#url" class="tsd-kind-icon">url</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -119,13 +119,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Orion<wbr>Api<span class="tsd-signature-symbol">(</span>url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, logger<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Console</span>, lib<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">&quot;/home/grigori/code/orion-pro-rest-api/node_modules/soap/lib/soap&quot;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_index_.orionapi.html" class="tsd-signature-type">OrionApi</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Orion<wbr>Api<span class="tsd-signature-symbol">(</span>url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, logger<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_index_.logger.html" class="tsd-signature-type">Logger</a>, lib<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">&quot;/home/grigori/code/orion-pro-rest-api/node_modules/soap/lib/soap&quot;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_index_.orionapi.html" class="tsd-signature-type">OrionApi</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in index.ts:115</li>
+									<li>Defined in index.ts:112</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -134,7 +134,7 @@
 									<h5>url: <span class="tsd-signature-type">string</span></h5>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> logger: <span class="tsd-signature-type">Console</span><span class="tsd-signature-symbol"> =&nbsp;console</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> logger: <a href="../interfaces/_index_.logger.html" class="tsd-signature-type">Logger</a><span class="tsd-signature-symbol"> =&nbsp;console</span></h5>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> lib: <span class="tsd-signature-type">&quot;/home/grigori/code/orion-pro-rest-api/node_modules/soap/lib/soap&quot;</span><span class="tsd-signature-symbol"> =&nbsp;Soap</span></h5>
@@ -153,14 +153,14 @@
 					<div class="tsd-signature tsd-kind-icon">client<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in index.ts:115</li>
+							<li>Defined in index.ts:112</li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="lib" class="tsd-anchor"></a>
-					<h3>lib</h3>
-					<div class="tsd-signature tsd-kind-icon">lib<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;Soap</span></div>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> lib</h3>
+					<div class="tsd-signature tsd-kind-icon">lib<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;/home/grigori/code/orion-pro-rest-api/node_modules/soap/lib/soap&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in index.ts:114</li>
@@ -170,20 +170,20 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="logger" class="tsd-anchor"></a>
 					<h3>logger</h3>
-					<div class="tsd-signature tsd-kind-icon">logger<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_index_.logger.html" class="tsd-signature-type">Logger</a><span class="tsd-signature-symbol"> =&nbsp;console</span></div>
+					<div class="tsd-signature tsd-kind-icon">logger<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_index_.logger.html" class="tsd-signature-type">Logger</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in index.ts:113</li>
+							<li>Defined in index.ts:114</li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="url" class="tsd-anchor"></a>
-					<h3>url</h3>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> url</h3>
 					<div class="tsd-signature tsd-kind-icon">url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in index.ts:112</li>
+							<li>Defined in index.ts:114</li>
 						</ul>
 					</aside>
 				</section>
@@ -200,7 +200,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in index.ts:266</li>
+									<li>Defined in index.ts:259</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -228,7 +228,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in index.ts:217</li>
+									<li>Defined in index.ts:210</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_index_.carddata.html" class="tsd-signature-type">CardData</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -245,7 +245,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in index.ts:201</li>
+									<li>Defined in index.ts:194</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -273,7 +273,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in index.ts:181</li>
+									<li>Defined in index.ts:174</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -296,7 +296,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in index.ts:224</li>
+									<li>Defined in index.ts:217</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -322,7 +322,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in index.ts:169</li>
+									<li>Defined in index.ts:162</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -345,7 +345,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in index.ts:154</li>
+									<li>Defined in index.ts:147</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -368,7 +368,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in index.ts:175</li>
+									<li>Defined in index.ts:168</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -391,7 +391,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in index.ts:131</li>
+									<li>Defined in index.ts:124</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -425,7 +425,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in index.ts:239</li>
+									<li>Defined in index.ts:232</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -459,7 +459,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in index.ts:123</li>
+									<li>Defined in index.ts:116</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Client</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -492,13 +492,13 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_index_.orionapi.html#client" class="tsd-kind-icon">client</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_index_.orionapi.html#lib" class="tsd-kind-icon">lib</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="_index_.orionapi.html#logger" class="tsd-kind-icon">logger</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_index_.orionapi.html#url" class="tsd-kind-icon">url</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
