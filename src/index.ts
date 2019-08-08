@@ -99,9 +99,18 @@ export interface PutPass {
     defaultAccessLevel: number;
 }
 
+type LogFunction = (arg: any) => void;
+
+export interface Logger {
+    log: LogFunction;
+    warn: LogFunction;
+    error: LogFunction;
+    debug: LogFunction;
+}
+
 export class OrionApi {
     url: string;
-    logger: Console = console;
+    logger: Logger = console;
     lib: any = Soap;
     private client: any | undefined;
 
@@ -113,7 +122,7 @@ export class OrionApi {
 
     private async start(): Promise<Soap.Client> {
         const client = await this.lib.createClientAsync(this.url);
-        this.logger.info('Connected to Orion!!!');
+        this.logger.log('Connected to Orion!!!');
         this.client = client;
 
         return client;
@@ -179,7 +188,9 @@ export class OrionApi {
                 offset,
                 count,
             });
-            this.logger.debug(`Get events from ${beginTime} till ${endTime} is succeded for events:`, eventTypes);
+            this.logger.debug(
+                `Get events from ${beginTime} till ${endTime} is succeded for events: ${JSON.stringify(eventTypes)}`,
+            );
 
             return parser.getEvents(eventTypes, accessPoints)(data);
         } catch (err) {
@@ -242,7 +253,7 @@ export class OrionApi {
             };
             // this data is Person
             const data = await client.PutPassWithAccLevelsAsync(params);
-            this.logger.debug('Setting access for user %s to card %s is succeded!!!', tabNum, options.cardNo);
+            this.logger.debug(`Setting access for user ${tabNum} to card ${options.cardNo} is succeded!!!`);
 
             return !!data;
         } catch (err) {
@@ -257,7 +268,7 @@ export class OrionApi {
             const client = this.client || (await this.start());
             // this data is Person
             const data = await client.DeletePassAsync(options);
-            this.logger.debug('Removing data access for card number %s is succeded!!!', options.cardNo);
+            this.logger.debug(`Removing data access for card number ${options.cardNo} is succeded!!!`);
 
             return !!data;
         } catch (err) {

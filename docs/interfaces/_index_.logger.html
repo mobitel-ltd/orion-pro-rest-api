@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>CardData | @mobitel.ltd/orion-pro-api</title>
+	<title>Logger | @mobitel.ltd/orion-pro-api</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -57,10 +57,10 @@
 					<a href="../modules/_index_.html">&quot;index&quot;</a>
 				</li>
 				<li>
-					<a href="_index_.carddata.html">CardData</a>
+					<a href="_index_.logger.html">Logger</a>
 				</li>
 			</ul>
-			<h1>Interface CardData</h1>
+			<h1>Interface Logger</h1>
 		</div>
 	</div>
 </header>
@@ -71,7 +71,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">CardData</span>
+						<span class="target">Logger</span>
 					</li>
 				</ul>
 			</section>
@@ -82,11 +82,10 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_index_.carddata.html#accesslevelid" class="tsd-kind-icon">Access<wbr>Level<wbr>Id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_index_.carddata.html#enddate" class="tsd-kind-icon">End<wbr>Date</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_index_.carddata.html#isblocked" class="tsd-kind-icon">Is<wbr>Blocked</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_index_.carddata.html#personid" class="tsd-kind-icon">Person<wbr>Id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_index_.carddata.html#startdate" class="tsd-kind-icon">Start<wbr>Date</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_index_.logger.html#debug" class="tsd-kind-icon">debug</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_index_.logger.html#error" class="tsd-kind-icon">error</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_index_.logger.html#log" class="tsd-kind-icon">log</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_index_.logger.html#warn" class="tsd-kind-icon">warn</a></li>
 							</ul>
 						</section>
 					</div>
@@ -95,52 +94,42 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="accesslevelid" class="tsd-anchor"></a>
-					<h3>Access<wbr>Level<wbr>Id</h3>
-					<div class="tsd-signature tsd-kind-icon">Access<wbr>Level<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="debug" class="tsd-anchor"></a>
+					<h3>debug</h3>
+					<div class="tsd-signature tsd-kind-icon">debug<span class="tsd-signature-symbol">:</span> <a href="../modules/_index_.html#logfunction" class="tsd-signature-type">LogFunction</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/mobitel-ltd/orion-pro-rest-api/blob/204a864/src/index.ts#L60">index.ts:60</a></li>
+							<li>Defined in <a href="https://github.com/mobitel-ltd/orion-pro-rest-api/blob/204a864/src/index.ts#L108">index.ts:108</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="enddate" class="tsd-anchor"></a>
-					<h3>End<wbr>Date</h3>
-					<div class="tsd-signature tsd-kind-icon">End<wbr>Date<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="error" class="tsd-anchor"></a>
+					<h3>error</h3>
+					<div class="tsd-signature tsd-kind-icon">error<span class="tsd-signature-symbol">:</span> <a href="../modules/_index_.html#logfunction" class="tsd-signature-type">LogFunction</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/mobitel-ltd/orion-pro-rest-api/blob/204a864/src/index.ts#L64">index.ts:64</a></li>
+							<li>Defined in <a href="https://github.com/mobitel-ltd/orion-pro-rest-api/blob/204a864/src/index.ts#L107">index.ts:107</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="isblocked" class="tsd-anchor"></a>
-					<h3>Is<wbr>Blocked</h3>
-					<div class="tsd-signature tsd-kind-icon">Is<wbr>Blocked<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="log" class="tsd-anchor"></a>
+					<h3>log</h3>
+					<div class="tsd-signature tsd-kind-icon">log<span class="tsd-signature-symbol">:</span> <a href="../modules/_index_.html#logfunction" class="tsd-signature-type">LogFunction</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/mobitel-ltd/orion-pro-rest-api/blob/204a864/src/index.ts#L61">index.ts:61</a></li>
+							<li>Defined in <a href="https://github.com/mobitel-ltd/orion-pro-rest-api/blob/204a864/src/index.ts#L105">index.ts:105</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="personid" class="tsd-anchor"></a>
-					<h3>Person<wbr>Id</h3>
-					<div class="tsd-signature tsd-kind-icon">Person<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="warn" class="tsd-anchor"></a>
+					<h3>warn</h3>
+					<div class="tsd-signature tsd-kind-icon">warn<span class="tsd-signature-symbol">:</span> <a href="../modules/_index_.html#logfunction" class="tsd-signature-type">LogFunction</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/mobitel-ltd/orion-pro-rest-api/blob/204a864/src/index.ts#L62">index.ts:62</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="startdate" class="tsd-anchor"></a>
-					<h3>Start<wbr>Date</h3>
-					<div class="tsd-signature tsd-kind-icon">Start<wbr>Date<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/mobitel-ltd/orion-pro-rest-api/blob/204a864/src/index.ts#L63">index.ts:63</a></li>
+							<li>Defined in <a href="https://github.com/mobitel-ltd/orion-pro-rest-api/blob/204a864/src/index.ts#L106">index.ts:106</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -162,39 +151,36 @@
 					<li class=" tsd-kind-class tsd-parent-kind-external-module">
 						<a href="../classes/_index_.orionapi.html" class="tsd-kind-icon">Orion<wbr>Api</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_index_.carddata.html" class="tsd-kind-icon">Card<wbr>Data</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_index_.carddata.html#accesslevelid" class="tsd-kind-icon">Access<wbr>Level<wbr>Id</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_index_.carddata.html#enddate" class="tsd-kind-icon">End<wbr>Date</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_index_.carddata.html#isblocked" class="tsd-kind-icon">Is<wbr>Blocked</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_index_.carddata.html#personid" class="tsd-kind-icon">Person<wbr>Id</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_index_.carddata.html#startdate" class="tsd-kind-icon">Start<wbr>Date</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_index_.eventdata.html" class="tsd-kind-icon">Event<wbr>Data</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_index_.eventoptions.html" class="tsd-kind-icon">Event<wbr>Options</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_index_.logger.html" class="tsd-kind-icon">Logger</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_index_.logger.html#debug" class="tsd-kind-icon">debug</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_index_.logger.html#error" class="tsd-kind-icon">error</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_index_.logger.html#log" class="tsd-kind-icon">log</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_index_.logger.html#warn" class="tsd-kind-icon">warn</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_index_.personfullinfo.html" class="tsd-kind-icon">Person<wbr>Full<wbr>Info</a>
 					</li>
