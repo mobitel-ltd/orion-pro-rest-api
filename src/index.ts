@@ -1,16 +1,59 @@
 /* eslint new-cap: ["error", { "properties": false }]*/
 import * as Soap from 'soap';
 import * as parser from './parser';
+import { pick, isEmpty } from 'lodash';
+import consts from './consts';
+
+export interface PersonFullInfo {
+    Id: number;
+    LastName: string;
+    FirstName: string;
+    MiddleName: string;
+    BirthDate: string;
+    Company: string;
+    Department: string;
+    Position: string;
+    CompanyId: number;
+    DepartmentId: number;
+    PositionId: number;
+    TabNum: string;
+    Phone?: number;
+    HomePhone?: number;
+    Address?: string;
+    AccessLevelId: number;
+    Status: number;
+    ContactIdIndex: number;
+    IsLockedDayCrossing: boolean;
+    IsFreeShedule: boolean;
+    ExternalId?: number;
+    IsInArchive: boolean;
+    DocumentType: number;
+    DocumentSerials?: string;
+    DocumentNumber?: number;
+    DocumentIssueDate: string;
+    DocumentEndingDate: string;
+    DocumentIsser?: string;
+    DocumentIsserCode?: string;
+    Sex: number;
+    Birthplace?: string;
+    EmailList?: string[];
+    ArchivingTimeStamp: string;
+    IsInBlackList: boolean;
+    IsDismissed: boolean;
+    BlackListComment?: string;
+    ChangeTime: string;
+    Itn?: string;
+}
 
 export interface EventData {
     TabNum: string;
     Description: string;
     EventDate: string;
-    EventTypeId: Number;
+    EventTypeId: number;
     EventId: string;
-    AccessPointId: Number;
+    AccessPointId: number;
     // TODO add limit of events
-    PassMode: Number;
+    PassMode: number;
 }
 
 export interface CardData {
@@ -21,31 +64,18 @@ export interface CardData {
     EndDate: string;
 }
 
-export interface Person {
-    LastName: string;
-    FirstName: string;
-    MiddleName: string;
-    TabNum: string;
-    IsDismissed: Boolean;
-    CompanyId: Number;
-    DepartmentId: Number;
-    PositionId: Number;
-}
-
-export interface TPersonData {
-    Id: Number;
+export interface PutPersonData {
+    Id: number;
     FirstName: string;
     MiddleName: string;
     LastName: string;
-    CompanyId: Number;
-    DepartmentId: Number;
+    CompanyId: number;
+    DepartmentId: number;
     TabNum: string;
-    PositionId: Number;
+    PositionId: number;
 }
 
-export type ParseType = 'getDefaultPersonData' | 'getPersonDataForPutPass';
-
-export interface GetEventsOptions {
+export interface EventOptions {
     /* ISO 8601 time of getting events */
     beginTime: string;
     /* ISO 8601 time of getting events */
@@ -56,22 +86,17 @@ export interface GetEventsOptions {
     count?: number;
 }
 
-export interface GetPersonByTabNumber {
+export interface PersonOptions {
     tabNum: string;
     withoutPhoto?: boolean;
-}
-
-export interface TAccessLevel {
-    Id: string;
 }
 
 export interface PutPass {
     cardNo: string;
     tabNum: string;
-    // TODO add access level depending on current level of user in system
-    accessLevels: TAccessLevel[];
     dateBegin: string;
     dateEnd: string;
+    defaultAccessLevel: number;
 }
 
 export class OrionApi {
@@ -94,16 +119,14 @@ export class OrionApi {
         return client;
     }
 
-    /**
-     * get person info about selected users
-     */
-    async getPersons(options?: {
-        count: number;
-        offset: number;
-        withoutPhoto: boolean;
-    }): Promise<Person[] | undefined> {
+    async getPersons(
+        options: {
+            count?: number;
+            offset?: number;
+            withoutPhoto?: boolean;
+        } = {},
+    ): Promise<PersonFullInfo[] | undefined> {
         try {
-            const { count = 0, offset = 0, withoutPhoto = true } = options || {};
             const client = this.client || (await this.start());
             const data = await client.GetPersonsAsync({
                 count: 0,
@@ -113,16 +136,13 @@ export class OrionApi {
             });
             this.logger.debug('Request for getting person info is succeded!!!');
 
-            return parser.getPersons(data);
+            return parser.allPersonHandle(data);
         } catch (err) {
             this.logger.error(err);
         }
     }
 
-    /**
-     * Get person info by tab number
-     */
-    async getPersonByTabNumber(options: GetPersonByTabNumber, parseType: ParseType = 'getDefaultPersonData') {
+    async getPersonByTabNumber(options: PersonOptions): Promise<PersonFullInfo | undefined> {
         try {
             const client = this.client || (await this.start());
             const data = await client.GetPersonByTabNumberAsync({
@@ -131,16 +151,25 @@ export class OrionApi {
             });
             this.logger.debug(`Request for getting info about person by tub number ${options.tabNum} is succeded!!!`);
 
-            return parser[parseType](data);
+            return parser.personHandle(data);
         } catch (err) {
             this.logger.error(err);
         }
     }
 
-    /**
-     * Get collections with all events from server by params and with expected properties
-     */
-    async getEvents(options: GetEventsOptions): Promise<EventData[] | undefined> {
+    async getPersonByPersonId(id: number): Promise<PersonFullInfo | undefined> {
+        const persons = await this.getPersons();
+
+        return persons && persons.find(person => person.Id === id);
+    }
+
+    async getPersonForPutCard(options: PersonOptions): Promise<PutPersonData | undefined> {
+        const data = await this.getPersonByTabNumber(options);
+
+        return data && (pick(data, consts.PERSON_PUT_KEYS_LIST) as PutPersonData);
+    }
+
+    async getEvents(options: EventOptions): Promise<EventData[] | undefined> {
         try {
             const { beginTime, endTime, offset = 0, count = 0, accessPoints = [], eventTypes = [] } = options;
             const client = this.client || (await this.start());
@@ -158,42 +187,64 @@ export class OrionApi {
         }
     }
 
-    /**
-     * @async Get key information
-     */
-    async getKey(options: { cardNo: string }): Promise<CardData | undefined> {
+    async getCard(options: { cardNo: string }): Promise<CardData | undefined> {
         try {
             const client = this.client || (await this.start());
             const data = await client.GetKeyDataAsync(options);
-            this.logger.debug('Get info about card by cardno %s is succeded!!!', options.cardNo);
+            this.logger.debug(`Get info about card by cardno ${options.cardNo} is succeded!!!`);
+            const parsedData = parser.getCard(data);
+            if (isEmpty(parsedData)) {
+                this.logger.debug(`No user use card ${options.cardNo}`);
+            }
 
-            return parser.getKey(data);
+            return parsedData;
         } catch (err) {
             this.logger.error(err);
         }
     }
 
-    /**  Set accsess for user by card with limit of time */
-    async putPass({ tabNum, ...options }: PutPass): Promise<boolean> {
+    async getAllCards(): Promise<CardData[]> {
+        const client = this.client || (await this.start());
+        const data = await client.GetKeysAsync();
+
+        return parser.getAllCards(data);
+    }
+
+    async getPersonAccessId(tabNum: string, personData?: PutPersonData): Promise<number | undefined> {
+        try {
+            const person = personData || (await this.getPersonByTabNumber({ tabNum }));
+            if (!person) {
+                return;
+            }
+            const allCards = await this.getAllCards();
+            const personCardData = allCards.find(card => card.PersonId === person.Id);
+
+            return personCardData && personCardData.AccessLevelId;
+        } catch (err) {
+            this.logger.error(err);
+        }
+    }
+
+    async putPass({ tabNum, defaultAccessLevel, ...options }: PutPass): Promise<boolean> {
         try {
             const client = this.client || (await this.start());
-            const personData = await this.getPersonByTabNumber({ tabNum }, 'getPersonDataForPutPass');
-            // TODO add access level depending on current level of user in system
-            const defaultAccessOptions = {
+            const personData = await this.getPersonForPutCard({ tabNum });
+            const personAccessLevelId = await this.getPersonAccessId(tabNum, personData);
+            const accessLevels = {
                 AccessLevel: {
-                    Id: 311,
+                    Id: personAccessLevelId || defaultAccessLevel,
                 },
             };
             const params = {
                 ...options,
                 personData,
-                accessLevels: defaultAccessOptions,
+                accessLevels,
             };
+            // this data is Person
             const data = await client.PutPassWithAccLevelsAsync(params);
             this.logger.debug('Setting access for user %s to card %s is succeded!!!', tabNum, options.cardNo);
 
-            return data;
-            // return parser.putPass(data);
+            return !!data;
         } catch (err) {
             this.logger.error(err);
 
@@ -201,18 +252,14 @@ export class OrionApi {
         }
     }
 
-    /**
-     * Remove card access
-     * @returns {Promise<Boolean>} result of request
-     */
     async deletePass(options: { cardNo: string }): Promise<boolean> {
         try {
             const client = this.client || (await this.start());
+            // this data is Person
             const data = await client.DeletePassAsync(options);
             this.logger.debug('Removing data access for card number %s is succeded!!!', options.cardNo);
 
-            return data;
-            // return parser.deletePass(data);
+            return !!data;
         } catch (err) {
             this.logger.error(err);
 

@@ -1,50 +1,74 @@
 {
-  "name": "@mobitel.ltd/orion-pro-api",
-  "version": "1.4.5",
-  "description": "my local service",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "publishConfig": {
-    "access": "public"
-  },
-  "scripts": {
-    "build": "tsc",
-    "docs": "node_modules/.bin/jsdoc -c jsdoc.json",
-    "dev": "node index.dev.js",
-    "test": "NODE_ENV=test mocha -r ts-node/register test/*.test.ts --exit"
-  },
-  "keywords": [
-    "soap",
-    "Orion PRO",
-    "api",
-    "rest"
-  ],
-  "pre-commit": [
-    "test"
-  ],
-  "author": "grigori-gru",
-  "license": "ISC",
-  "files": [
-    "dist/**/*"
-  ],
-  "devDependencies": {
-    "@types/bluebird": "^3.5.26",
-    "@types/faker": "^4.1.5",
-    "@types/mocha": "^5.2.6",
-    "@types/node": "^11.11.4",
-    "better-docs": "^1.1.5",
-    "faker": "^4.1.0",
-    "jsdoc": "^3.5.5",
-    "pre-commit": "^1.2.2",
-    "ts-node": "^8.0.3",
-    "tslint": "^5.14.0",
-    "typescript": "^3.3.4000"
-  },
-  "dependencies": {
-    "prettier": "1.16.4",
-    "@types/lodash": "^4.14.123",
-    "@types/soap": "^0.21.0",
-    "lodash": "^4.17.11",
-    "soap": "^0.26.0"
-  }
+    "name": "@mobitel.ltd/orion-pro-api",
+    "version": "1.5.0",
+    "description": "my local service",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "publishConfig": {
+        "access": "public"
+    },
+    "scripts": {
+        "build": "rimraf dist && tsc",
+        "prepublish": "build",
+        "docs": "node_modules/.bin/typedoc --excludeExternals --out docs src/index.ts",
+        "dev": "ts-node index.dev.ts",
+        "test": "jest"
+    },
+    "keywords": [
+        "soap",
+        "Orion PRO",
+        "api",
+        "rest"
+    ],
+    "pre-commit": [
+        "test",
+        "docs"
+    ],
+    "author": "grigori-gru",
+    "license": "ISC",
+    "files": [
+        "dist/**/*"
+    ],
+    "devDependencies": {
+        "@types/bluebird": "^3.5.26",
+        "@types/faker": "^4.1.5",
+        "@types/jest": "^24.0.17",
+        "@types/node": "^11.11.4",
+        "faker": "^4.1.0",
+        "jest": "^24.8.0",
+        "pre-commit": "^1.2.2",
+        "ts-jest": "^24.0.2",
+        "ts-node": "^8.3.0",
+        "tslint": "^5.14.0",
+        "typedoc": "^0.15.0",
+        "typescript": "^3.3.4000"
+    },
+    "dependencies": {
+        "@types/lodash": "^4.14.123",
+        "@types/soap": "^0.21.0",
+        "lodash": "^4.17.11",
+        "prettier": "1.16.4",
+        "rimraf": "^2.6.3",
+        "soap": "^0.26.0"
+    },
+    "jest": {
+        "moduleFileExtensions": [
+            "js",
+            "json",
+            "ts"
+        ],
+        "testRegex": ".test.ts$",
+        "transform": {
+            "^.+\\.(t|j)s$": "ts-jest"
+        },
+        "testEnvironment": "node",
+        "modulePathIgnorePatterns": [
+            "node_modules"
+        ],
+        "globals": {
+            "ts-jest": {
+                "diagnostics": false
+            }
+        }
+    }
 }

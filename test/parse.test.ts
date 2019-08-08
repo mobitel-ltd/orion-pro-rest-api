@@ -4,7 +4,6 @@ import * as testUtils from './fixtures/utils';
 // const getPersonsJSON = require('./fixtures/get-persons.json');
 // const getPersonByTabJSON = require('./fixtures/get-person-by-tab.json');
 import * as parser from '../src/parser';
-import * as assert from 'assert';
 
 describe('Test data parser', () => {
     const accessPointIdList = Array.from({ length: 5 }, () => 12345);
@@ -24,38 +23,98 @@ describe('Test data parser', () => {
     });
 
     it('Expect parser return list of keys', () => {
-        const result = parser.getPersons(listPersonData);
+        const result = parser.allPersonHandle(listPersonData);
         const body = listPersonData[0].return.OperationResult.item[0];
         const expectedData = {
-            LastName: body.LastName.$value,
-            FirstName: body.FirstName.$value,
-            MiddleName: body.MiddleName.$value,
-            TabNum: body.TabNum.$value,
+            AccessLevelId: body.AccessLevelId.$value,
+            Address: body.Address.$value,
+            ArchivingTimeStamp: body.ArchivingTimeStamp.$value,
+            BirthDate: body.BirthDate.$value,
+            Birthplace: body.Birthplace.$value,
+            BlackListComment: body.BlackListComment.$value,
+            ChangeTime: body.ChangeTime.$value,
+            Company: body.Company.$value,
             CompanyId: body.CompanyId.$value,
+            ContactIdIndex: body.ContactIdIndex.$value,
+            Department: body.Department.$value,
             DepartmentId: body.DepartmentId.$value,
-            PositionId: body.PositionId.$value,
+            DocumentEndingDate: body.DocumentEndingDate.$value,
+            DocumentIsser: body.DocumentIsser.$value,
+            DocumentIsserCode: body.DocumentIsserCode.$value,
+            DocumentIssueDate: body.DocumentIssueDate.$value,
+            DocumentNumber: body.DocumentNumber.$value,
+            DocumentSerials: body.DocumentSerials.$value,
+            DocumentType: body.DocumentType.$value,
+            EmailList: body.EmailList.$value,
+            ExternalId: body.ExternalId.$value,
+            FirstName: body.FirstName.$value,
+            HomePhone: body.HomePhone.$value,
+            Id: body.Id.$value,
             IsDismissed: body.IsDismissed.$value,
+            IsFreeShedule: body.IsFreeShedule.$value,
+            IsInArchive: body.IsInArchive.$value,
+            IsInBlackList: body.IsInBlackList.$value,
+            IsLockedDayCrossing: body.IsLockedDayCrossing.$value,
+            Itn: body.Itn.$value,
+            LastName: body.LastName.$value,
+            MiddleName: body.MiddleName.$value,
+            Phone: body.Phone.$value,
+            Position: body.Position.$value,
+            PositionId: body.PositionId.$value,
+            Sex: body.Sex.$value,
+            Status: body.Status.$value,
+            TabNum: body.TabNum.$value,
         };
 
-        assert.equal(result.length, count);
-        assert.deepEqual(result[0], expectedData);
+        expect(result.length).toEqual(count);
+        expect(result[0]).toEqual(expectedData);
     });
 
     it('Expect getPersonByType returns correct data', () => {
-        const result = parser.getDefaultPersonData(personData);
+        const result = parser.personHandle(personData);
         const body = personData[0].return.OperationResult;
         const expectedData = {
-            LastName: body.LastName.$value,
-            FirstName: body.FirstName.$value,
-            MiddleName: body.MiddleName.$value,
-            TabNum: body.TabNum.$value,
+            AccessLevelId: body.AccessLevelId.$value,
+            Address: body.Address.$value,
+            ArchivingTimeStamp: body.ArchivingTimeStamp.$value,
+            BirthDate: body.BirthDate.$value,
+            Birthplace: body.Birthplace.$value,
+            BlackListComment: body.BlackListComment.$value,
+            ChangeTime: body.ChangeTime.$value,
+            Company: body.Company.$value,
             CompanyId: body.CompanyId.$value,
+            ContactIdIndex: body.ContactIdIndex.$value,
+            Department: body.Department.$value,
             DepartmentId: body.DepartmentId.$value,
-            PositionId: body.PositionId.$value,
+            DocumentEndingDate: body.DocumentEndingDate.$value,
+            DocumentIsser: body.DocumentIsser.$value,
+            DocumentIsserCode: body.DocumentIsserCode.$value,
+            DocumentIssueDate: body.DocumentIssueDate.$value,
+            DocumentNumber: body.DocumentNumber.$value,
+            DocumentSerials: body.DocumentSerials.$value,
+            DocumentType: body.DocumentType.$value,
+            EmailList: body.EmailList.$value,
+            ExternalId: body.ExternalId.$value,
+            FirstName: body.FirstName.$value,
+            HomePhone: body.HomePhone.$value,
+            Id: body.Id.$value,
             IsDismissed: body.IsDismissed.$value,
+            IsFreeShedule: body.IsFreeShedule.$value,
+            IsInArchive: body.IsInArchive.$value,
+            IsInBlackList: body.IsInBlackList.$value,
+            IsLockedDayCrossing: body.IsLockedDayCrossing.$value,
+            Itn: body.Itn.$value,
+            LastName: body.LastName.$value,
+            MiddleName: body.MiddleName.$value,
+            Phone: body.Phone.$value,
+            Position: body.Position.$value,
+            PositionId: body.PositionId.$value,
+            Sex: body.Sex.$value,
+            Status: body.Status.$value,
+            TabNum: body.TabNum.$value,
         };
 
-        assert.deepEqual(result, expectedData);
+        expect(result).toEqual(expectedData);
     });
 
     it('Expect getEvents works correct', () => {
@@ -75,11 +134,11 @@ describe('Test data parser', () => {
             PassMode: body.PassMode.$value,
         };
 
-        assert.deepEqual(result[0], expectedEventIdItem);
+        expect(result[0]).toEqual(expectedEventIdItem);
     });
 
-    it('Expect getKey return correct data', () => {
-        const result = parser.getKey(keyData);
+    it('Expect getCard return correct data', () => {
+        const result = parser.getCard(keyData);
         const body = keyData[0].return.OperationResult;
         const expectedGetKeyData = {
             AccessLevelId: body.AccessLevelId.$value,
@@ -89,23 +148,6 @@ describe('Test data parser', () => {
             StartDate: body.StartDate.$value,
         };
 
-        assert.deepEqual(result, expectedGetKeyData);
-    });
-
-    it('Expect getPersonDataForPutPass return correct data', () => {
-        const result = parser.getPersonDataForPutPass(personData);
-        const body = personData[0].return.OperationResult;
-        const expectedData = {
-            LastName: body.LastName.$value,
-            FirstName: body.FirstName.$value,
-            MiddleName: body.MiddleName.$value,
-            TabNum: body.TabNum.$value,
-            CompanyId: body.CompanyId.$value,
-            DepartmentId: body.DepartmentId.$value,
-            PositionId: body.PositionId.$value,
-            Id: body.Id.$value,
-        };
-
-        assert.deepEqual(result, expectedData);
+        expect(result).toEqual(expectedGetKeyData);
     });
 });

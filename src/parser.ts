@@ -1,5 +1,8 @@
-import { pick, get, map, mapValues, head, pipe, conforms, filter, includes } from 'lodash/fp';
+import { pick, get, map, mapValues, head, pipe, conforms, filter, includes, omit } from 'lodash/fp';
 import consts from './consts';
+import { PersonFullInfo } from '.';
+
+const ignoreProperty = 'attributes';
 
 const isIn = (arr: number[]) => (item: number) => includes(item, arr);
 
@@ -11,25 +14,19 @@ const isValidEvent = (eventTypes: number[], accessPoints: number[]) =>
 
 const eventsCollectionHandler = pipe([pick(consts.EVENT_KEYS_LIST), mapValues(consts.VALUE_NAME)]);
 
-const personHandler = (keyList: string[]) => pipe([pick(keyList), mapValues(consts.VALUE_NAME)]);
+const personHandler = pipe([omit(ignoreProperty), mapValues(consts.VALUE_NAME)]);
 
-export const getPersons = pipe([
-    head,
-    get(consts.PATH_TO_INFO_ARRAY),
-    map(personHandler(consts.PERSON_DEFAULT_KEYS_LIST)),
-]);
+const keyHandler = pipe([pick(consts.CARD_KEYS_LIST), mapValues(consts.VALUE_NAME)]);
 
-export const getDefaultPersonData = pipe([
-    head,
-    get(consts.PATH_TO_INFO),
-    personHandler(consts.PERSON_DEFAULT_KEYS_LIST),
-]);
+export const allPersonHandle = (data: any): PersonFullInfo[] | undefined =>
+    pipe([head, get(consts.PATH_TO_INFO_ARRAY), map(personHandler)])(data);
 
-export const getPersonDataForPutPass = pipe([
-    head,
-    get(consts.PATH_TO_INFO),
-    personHandler(consts.PERSON_PUT_KEYS_LIST),
-]);
+export const personHandle = (data: any): PersonFullInfo | undefined =>
+    pipe([head, get(consts.PATH_TO_INFO), personHandler])(data);
+
+export const getCard = pipe([head, get(consts.PATH_TO_INFO), keyHandler]);
+
+export const getAllCards = pipe([head, get(consts.PATH_TO_INFO_ARRAY), map(keyHandler)]);
 
 export const getEvents = (eventTypes: number[], accessPoints: number[]) =>
     pipe([
@@ -38,5 +35,3 @@ export const getEvents = (eventTypes: number[], accessPoints: number[]) =>
         map(eventsCollectionHandler),
         filter(isValidEvent(eventTypes, accessPoints)),
     ]);
-
-export const getKey = pipe([head, get(consts.PATH_TO_INFO), pick(consts.CARD_KEYS_LIST), mapValues(consts.VALUE_NAME)]);
