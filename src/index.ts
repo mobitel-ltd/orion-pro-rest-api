@@ -109,16 +109,9 @@ export interface Logger {
 }
 
 export class OrionApi {
-    url: string;
-    logger: Logger = console;
-    lib: any = Soap;
     private client: any | undefined;
 
-    constructor(url: string, logger = console, lib = Soap) {
-        this.url = url;
-        this.logger = logger;
-        this.lib = lib;
-    }
+    constructor(private url: string, public logger: Logger = console, private lib = Soap) {}
 
     private async start(): Promise<Soap.Client> {
         const client = await this.lib.createClientAsync(this.url);
