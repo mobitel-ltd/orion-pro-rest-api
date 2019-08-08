@@ -199,6 +199,8 @@ export class OrionApi {
             const parsedData = parser.getCard(data);
             if (isEmpty(parsedData)) {
                 this.logger.debug(`No user use card ${options.cardNo}`);
+
+                return;
             }
 
             return parsedData;
