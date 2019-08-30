@@ -172,23 +172,19 @@ export class OrionApi {
     }
 
     async getEvents(options: EventOptions): Promise<EventData[] | undefined> {
-        try {
-            const { beginTime, endTime, offset = 0, count = 0, accessPoints = [], eventTypes = [] } = options;
-            const client = this.client || (await this.start());
-            const data = await client.GetEventsAsync({
-                beginTime,
-                endTime,
-                offset,
-                count,
-            });
-            this.logger.debug(
-                `Get events from ${beginTime} till ${endTime} is succeded for events: ${JSON.stringify(eventTypes)}`,
-            );
+        const { beginTime, endTime, offset = 0, count = 0, accessPoints = [], eventTypes = [] } = options;
+        const client = this.client || (await this.start());
+        const data = await client.GetEventsAsync({
+            beginTime,
+            endTime,
+            offset,
+            count,
+        });
+        this.logger.debug(
+            `Get events from ${beginTime} till ${endTime} is succeded for events: ${JSON.stringify(eventTypes)}`,
+        );
 
-            return parser.getEvents(eventTypes, accessPoints)(data);
-        } catch (err) {
-            this.logger.error(err);
-        }
+        return parser.getEvents(eventTypes, accessPoints)(data);
     }
 
     async getCard(options: { cardNo: string }): Promise<CardData | undefined> {
