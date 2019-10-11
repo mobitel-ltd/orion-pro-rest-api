@@ -130,7 +130,6 @@ export class OrionApi {
     ): Promise<PersonFullInfo[] | undefined> {
         try {
             const client = this.client || (await this.start());
-            this.logger.debug('Start request for getting person info');
             const data = await client.GetPersonsAsync({
                 count: 0,
                 offset: 0,
@@ -148,6 +147,7 @@ export class OrionApi {
     async getPersonByTabNumber(options: PersonOptions): Promise<PersonFullInfo | undefined> {
         try {
             const client = this.client || (await this.start());
+            this.logger.debug(`Start request for getting info about person by tub number ${options.tabNum}`);
             const data = await client.GetPersonByTabNumberAsync({
                 withoutPhoto: true,
                 ...options,
