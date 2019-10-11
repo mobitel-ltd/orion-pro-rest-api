@@ -175,12 +175,14 @@ export class OrionApi {
     async getEvents(options: EventOptions): Promise<EventData[] | undefined> {
         const { beginTime, endTime, offset = 0, count = 0, accessPoints = [], eventTypes = [] } = options;
         const client = this.client || (await this.start());
+        const date = Date.now();
         const data = await client.GetEventsAsync({
             beginTime,
             endTime,
             offset,
             count,
         });
+        console.log(Date.now() - date);
         this.logger.debug(
             `Get events from ${beginTime} till ${endTime} is succeded for events: ${JSON.stringify(eventTypes)}`,
         );
@@ -211,6 +213,18 @@ export class OrionApi {
         const data = await client.GetKeysAsync();
 
         return parser.getAllCards(data);
+    }
+
+    // Just simple ping request
+    async ping(): Promise<number> {
+        const date = Date.now();
+        try {
+            const client = this.client || (await this.start());
+            await client.GetPersonByTabNumberAsync();
+        } catch {
+        } finally {
+            return Date.now() - date;
+        }
     }
 
     async getPersonAccessId(tabNum: string, personData?: PutPersonData): Promise<number | undefined> {
