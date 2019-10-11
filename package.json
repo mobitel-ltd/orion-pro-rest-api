@@ -1,6 +1,6 @@
 {
     "name": "@mobitel.ltd/orion-pro-api",
-    "version": "1.5.5",
+    "version": "1.5.6",
     "description": "my local service",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",

@@ -130,6 +130,7 @@ export class OrionApi {
     ): Promise<PersonFullInfo[] | undefined> {
         try {
             const client = this.client || (await this.start());
+            this.logger.debug('Start request for getting person info');
             const data = await client.GetPersonsAsync({
                 count: 0,
                 offset: 0,
