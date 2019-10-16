@@ -182,7 +182,6 @@ export class OrionApi {
             offset,
             count,
         });
-        console.log(Date.now() - date);
         this.logger.debug(
             `Get events from ${beginTime} till ${endTime} is succeded for events: ${JSON.stringify(eventTypes)}`,
         );
