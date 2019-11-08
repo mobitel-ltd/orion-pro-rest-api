@@ -73,6 +73,7 @@ export interface PutPersonData {
     DepartmentId: number;
     TabNum: string;
     PositionId: number;
+    Photo: string;
 }
 
 export interface EventOptions {
@@ -167,7 +168,7 @@ export class OrionApi {
     }
 
     async getPersonForPutCard(options: PersonOptions): Promise<PutPersonData | undefined> {
-        const data = await this.getPersonByTabNumber(options);
+        const data = await this.getPersonByTabNumber({ ...options, withoutPhoto: false });
 
         return data && (pick(data, consts.PERSON_PUT_KEYS_LIST) as PutPersonData);
     }
@@ -264,7 +265,7 @@ export class OrionApi {
             const data = await client.PutPassWithAccLevelsAsync(params);
             this.logger.debug(`Setting access for user ${tabNum} to card ${options.cardNo} is succeded!!!`);
 
-            return !!data;
+            return Boolean(data);
         } catch (err) {
             this.logger.error(err);
 
