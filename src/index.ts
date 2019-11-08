@@ -216,13 +216,17 @@ export class OrionApi {
 
     // Just simple ping request
     async ping(): Promise<number> {
-        const date = Date.now();
         try {
+            const date = Date.now();
             const client = this.client || (await this.start());
             await client.GetPersonByTabNumberAsync();
-        } catch {
-        } finally {
+
             return Date.now() - date;
+        } catch (error) {
+            const msg = 'Connection failed!!!';
+            this.logger.error(msg);
+
+            throw new Error('Connection failed!!!');
         }
     }
 
